@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OCR and Ingredient Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <style>
         .container-2 {
             border: 1px solid #ccc;
@@ -36,5 +38,49 @@
         </div>
         {% endif %}
     </div>
+    
+    <script>
+        $(document).ready(function(){
+            $("form").on("submit", function(event){
+                event.preventDefault();
+        
+                var formData = new FormData(this);
+        
+                $.ajax({
+                    url: '/',
+                    type: 'POST',
+                    data: formData,
+                    success: function(data){
+                        // Clear any existing error message and harmful ingredients
+                        $('.error').text('');
+                        $('.container-2').remove();
+        
+                        // Display the error message, if any
+                        if (data.error) {
+                            $('.error').text(data.error);
+                        }
+        
+                        // Display the harmful ingredients, if any
+                        if (data.harmful_ingredients.length > 0) {
+                            var html = '<div class="container-2"><h2>Harmful Ingredients Detected:</h2><ul>';
+                            $.each(data.harmful_ingredients, function(i, ingredient) {
+                                html += '<li>' + ingredient[0] + ' - ' + ingredient[1] + '</li>';
+                            });
+                            html += '</ul></div>';
+                            $('.container').append(html);
+                        }
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            });
+        });
+        </script>
 </body>
+
+
+
 </html>
+
+

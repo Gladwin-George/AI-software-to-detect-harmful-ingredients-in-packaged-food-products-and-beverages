@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import cv2
 import easyocr
 import numpy as np
@@ -21,22 +21,22 @@ with open('harmful_ingredients.csv', 'r') as file:
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    harmful_ingredients = session.get('harmful_ingredients', None)
-    session.pop('harmful_ingredients', None)  # Clear the session after retrieving the data
+    error = None
+    harmful_ingredients = []
 
     if request.method == 'POST':
         # Check if a file was uploaded
         if 'file' not in request.files:
-            return redirect(url_for('index', error="No file uploaded"))
+            error = "No file uploaded"
 
         file = request.files['file']
 
         # If the user does not select a file, the browser submits an empty file without a filename
         if file.filename == '':
-            return redirect(url_for('index', error="No selected file"))
+            error = "No selected file"
 
         # If the file exists and is allowed, proceed with OCR and detection
-        if file:
+        if file and not error:
             filename = 'uploaded_image.jpg'
             file.save(filename)
 
@@ -47,25 +47,24 @@ def index():
             extracted_text = ' '.join([result[1] for result in text_results])
 
             # Step 3: Identify harmful ingredients
-            found_harmful_ingredients = []
             for ingredient_name, description in harmful_ingredients_dict.items():
                 if ingredient_name in extracted_text.lower():
-                    found_harmful_ingredients.append((ingredient_name, description))
+                    harmful_ingredients.append((ingredient_name, description))
 
             os.remove(filename)  # Remove the uploaded image
 
-            session['harmful_ingredients'] = found_harmful_ingredients  # Store the harmful ingredients in the session
-            return redirect(url_for('show_harmful_ingredients'))
+        return jsonify({'error': error, 'harmful_ingredients': harmful_ingredients})
 
-    # Clear harmful ingredients when rendering the index page
-    return render_template('index.html', harmful_ingredients=harmful_ingredients)
+    return render_template('index.html')
 
-@app.route('/harmful-ingredients')
-def show_harmful_ingredients():
-    harmful_ingredients = session.get('harmful_ingredients', [])
-    session.pop('harmful_ingredients', None)  # Clear the session after retrieving the data
-    return render_template('index.html', harmful_ingredients=harmful_ingredients) 
+# @app.route('/harmful-ingredients')
+# def show_harmful_ingredients():
+#     harmful_ingredients = session.get('harmful_ingredients', [])
+#     session.pop('harmful_ingredients', None)  # Clear the session after retrieving the data
+#     return render_template('index.html', harmful_ingredients=harmful_ingredients) 
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+    
