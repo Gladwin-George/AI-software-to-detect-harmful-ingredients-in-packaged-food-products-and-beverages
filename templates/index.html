@@ -4,24 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OCR and Ingredient Detection</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="static\style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <style>
-        .container {
-            margin: 20px;
-        }
-
-        .container-1, .container-2 {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: blue;
-            color: white;
-        }
-    </style>
 </head>
 <body>
+
     <div class="container">
         <div class="container-1">
             <h1>Upload Image</h1>
@@ -45,6 +32,7 @@
                 {% endif %}
             </ul>
         </div>
+    </div>
     
     <script>
         $(document).ready(function(){
@@ -80,6 +68,7 @@
                 });
             });
         });
-        </script>
+    </script>
+
 </body>
 </html>
