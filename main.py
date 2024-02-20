@@ -57,12 +57,6 @@ def index():
 
     return render_template('index.html')
 
-# @app.route('/harmful-ingredients')
-# def show_harmful_ingredients():
-#     harmful_ingredients = session.get('harmful_ingredients', [])
-#     session.pop('harmful_ingredients', None)  # Clear the session after retrieving the data
-#     return render_template('index.html', harmful_ingredients=harmful_ingredients) 
-
 
 if __name__ == '__main__':
     app.run(debug=True)

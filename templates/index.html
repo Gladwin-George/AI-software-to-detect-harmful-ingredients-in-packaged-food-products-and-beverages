@@ -8,36 +8,43 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <style>
-        .container-2 {
+        .container {
+            margin: 20px;
+        }
+
+        .container-1, .container-2 {
             border: 1px solid #ccc;
             padding: 10px;
             margin-top: 20px;
+            background-color: blue;
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Upload Image</h1>
-        <form action="/" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".jpg, .jpeg, .png">
-            <input type="submit" value="Upload">
-        </form>
+        <div class="container-1">
+            <h1>Upload Image</h1>
+            <form action="/" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".jpg, .jpeg, .png">
+                <input type="submit" value="Upload">
+            </form>
 
-        {% if error %}
-        <p class="error">{{ error }}</p>
-        {% endif %}
-
-        {% if harmful_ingredients %}
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
+        </div>
+        
         <div class="container-2">
             <h2>Harmful Ingredients Detected:</h2>
-            <ul>
-                {% for ingredient, description in harmful_ingredients %}
-                    <li>{{ ingredient }} - {{ description }}</li>
-                {% endfor %}
+            <ul id="harmful-ingredients-list">
+                {% if harmful_ingredients %}
+                    {% for ingredient, description in harmful_ingredients %}
+                        <li>{{ ingredient }} - {{ description }}</li>
+                    {% endfor %}
+                {% endif %}
             </ul>
         </div>
-        {% endif %}
-    </div>
     
     <script>
         $(document).ready(function(){
@@ -53,7 +60,7 @@
                     success: function(data){
                         // Clear any existing error message and harmful ingredients
                         $('.error').text('');
-                        $('.container-2').remove();
+                        $('#harmful-ingredients-list').empty();
         
                         // Display the error message, if any
                         if (data.error) {
@@ -62,12 +69,9 @@
         
                         // Display the harmful ingredients, if any
                         if (data.harmful_ingredients.length > 0) {
-                            var html = '<div class="container-2"><h2>Harmful Ingredients Detected:</h2><ul>';
                             $.each(data.harmful_ingredients, function(i, ingredient) {
-                                html += '<li>' + ingredient[0] + ' - ' + ingredient[1] + '</li>';
+                                $('#harmful-ingredients-list').append('<li>' + ingredient[0] + ' - ' + ingredient[1] + '</li>');
                             });
-                            html += '</ul></div>';
-                            $('.container').append(html);
                         }
                     },
                     cache: false,
@@ -78,9 +82,4 @@
         });
         </script>
 </body>
-
-
-
 </html>
-
-
