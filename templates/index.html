@@ -24,13 +24,16 @@
         
         <div class="container-2">
             <h2>Harmful Ingredients Detected:</h2>
-            <ul id="harmful-ingredients-list">
-                {% if harmful_ingredients %}
-                    {% for ingredient, description in harmful_ingredients %}
-                        <li>{{ ingredient }} - {{ description }}</li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
+            <div id="harmful-ingredients-list">
+                <ol>
+                    {% if harmful_ingredients %}
+                        {% for ingredient, description in harmful_ingredients %}
+                            <li>{{ ingredient }} - {{ description }}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ol>
+            </div>
+            
         </div>
     </div>
     

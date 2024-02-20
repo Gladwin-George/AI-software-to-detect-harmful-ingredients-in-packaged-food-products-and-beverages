@@ -4,20 +4,21 @@ import easyocr
 import numpy as np
 import csv
 import os
+import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'your secret key'  # Set the secret key for your Flask application to use sessions
 
-# Load harmful ingredients from CSV into a dictionary
+# Step 2: Load harmful ingredients from SQLite database into a dictionary
 harmful_ingredients_dict = {}
-with open('harmful_ingredients.csv', 'r') as file:
-    csv_reader = csv.reader(file)
-    next(csv_reader)  # Skip the first row (headings)
-    for row in csv_reader:
-        if len(row) >= 2 and row[0] and row[1]:  # Check if both columns have data
-            ingredient_name = row[0].strip().lower()  # Assuming ingredient name is in the first column
+conn = sqlite3.connect('harmful_ingredients.db')
+cursor = conn.cursor()
+cursor.execute("SELECT * FROM harmful_ingredients")
+for row in cursor.fetchall():
+            ingredient_name = row[0].strip()  # Assuming ingredient name is in the first column
             harmful_ingredient_description = row[1].strip()  # Assuming harmful ingredient description is in the second column
-            harmful_ingredients_dict[ingredient_name] = harmful_ingredient_description
+            harmful_ingredients_dict[ingredient_name.lower()] = harmful_ingredient_description
+conn.close()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
