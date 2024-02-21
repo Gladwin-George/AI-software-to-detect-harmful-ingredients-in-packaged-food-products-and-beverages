@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 import cv2
 import easyocr
 import numpy as np
-import csv
 import os
 import sqlite3
 
