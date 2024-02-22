@@ -165,8 +165,8 @@ sample images/
 #data base file
 users.db
 
-#code to check sql values
-sqltry.py 
+#codes to check sql values
+sql codes
 
 #folder to try database working
 database try/
