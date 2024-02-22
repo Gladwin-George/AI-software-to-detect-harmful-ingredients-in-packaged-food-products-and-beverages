@@ -161,3 +161,9 @@ cython_debug/
 
 #sample image
 sample images/
+
+#data base file
+users.db
+
+#code to check sql values
+sqltry.py 
