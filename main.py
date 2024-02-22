@@ -21,6 +21,7 @@ cursor.execute('''
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL,
+        age INTEGER NOT NULL,
         password TEXT NOT NULL,
         obese TEXT NOT NULL,
         diabetes TEXT NOT NULL,
@@ -91,6 +92,7 @@ def register():
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['email']
+        age = request.form['age']
         password = request.form['password']
         obese = request.form['obese']
         diabetes = request.form['diabetes']
@@ -115,8 +117,8 @@ def register():
             # Insert the user into the database with additional information
             conn = sqlite3.connect('users.db')
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO users (name, email, password, obese, diabetes, highbp, highcholesterol, fattyliver, kidney, heartproblem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                           (name, email, hashed_password, obese, diabetes, highbp, highcholesterol, fattyliver, kidney, heartproblem))
+            cursor.execute("INSERT INTO users (name, email, age, password, obese, diabetes, highbp, highcholesterol, fattyliver, kidney, heartproblem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                           (name, email, age, hashed_password, obese, diabetes, highbp, highcholesterol, fattyliver, kidney, heartproblem))
             conn.commit()
             conn.close()
 
@@ -139,7 +141,7 @@ def login():
 
         if user:
             # Check password hash
-            if bcrypt.checkpw(password.encode('utf-8'), user[3]):
+            if bcrypt.checkpw(password.encode('utf-8'), user[4]):
                 session['user_id'] = user[0]  # Store user ID in session
                 return redirect(url_for('index'))
 
