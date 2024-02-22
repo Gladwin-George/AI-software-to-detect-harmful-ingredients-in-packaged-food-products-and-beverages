@@ -167,3 +167,6 @@ users.db
 
 #code to check sql values
 sqltry.py 
+
+#folder to try database working
+database try/
