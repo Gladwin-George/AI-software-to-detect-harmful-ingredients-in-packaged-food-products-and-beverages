@@ -9,33 +9,42 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="container-1">
-            <h1>Upload Image</h1>
-            <form action="/" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" accept=".jpg, .jpeg, .png">
-                <input type="submit" value="Upload">
-            </form>
+    <section>
+        <button>
+            <a href="{{ url_for('login') }}">Login</a>
+        </button>
 
-            {% if error %}
-            <p class="error">{{ error }}</p>
-            {% endif %}
-        </div>
-        
-        <div class="container-2">
-            <h2>Harmful Ingredients Detected:</h2>
-            <div id="harmful-ingredients-list">
-                <ol>
-                    {% if harmful_ingredients %}
-                        {% for ingredient, description in harmful_ingredients %}
-                            <li>{{ ingredient }} - {{ description }}</li>
-                        {% endfor %}
-                    {% endif %}
-                </ol>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="container-1">
+                <h1>Upload Image</h1>
+                <form action="/" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" accept=".jpg, .jpeg, .png">
+                    <input type="submit" value="Upload">
+                </form>
+
+                {% if error %}
+                <p class="error">{{ error }}</p>
+                {% endif %}
             </div>
             
+            <div class="container-2">
+                <h2>Harmful Ingredients Detected:</h2>
+                <div id="harmful-ingredients-list">
+                    <ol>
+                        {% if harmful_ingredients %}
+                            {% for ingredient, description in harmful_ingredients %}
+                                <li>{{ ingredient }} - {{ description }}</li>
+                            {% endfor %}
+                        {% endif %}
+                    </ol>
+                </div>
+                
+            </div>
         </div>
-    </div>
+    </section>
     
     <script>
         $(document).ready(function(){

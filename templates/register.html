@@ -17,6 +17,36 @@
         <input type="email" id="email" name="email" required><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br>
+
+        <!-- existing form fields -->
+        <label for="obese">Are you obese?</label><br>
+        <input type="radio" id="obeseYes" name="obese" value="yes" required> Yes
+        <input type="radio" id="obeseNo" name="obese" value="no" required> No<br>
+
+        <label for="diabetes">Do you have diabetes?</label><br>
+        <input type="radio" id="diabetesYes" name="diabetes" value="yes" required> Yes
+        <input type="radio" id="diabetesNo" name="diabetes" value="no" required> No<br>
+
+        <label for="highbp">Do you have high blood pressure?</label><br>
+        <input type="radio" id="highbpYes" name="highbp" value="yes" required> Yes
+        <input type="radio" id="highbpNo" name="highbp" value="no" required> No<br>
+
+        <label for="highcholesterol">Do you have high cholesterol?</label><br>
+        <input type="radio" id="highcholesterolYes" name="highcholesterol" value="yes" required> Yes
+        <input type="radio" id="highcholesterolNo" name="highcholesterol" value="no" required> No<br>
+
+        <label for="fattyliver">Do you have Fatty liver?</label><br>
+        <input type="radio" id="fattyliverYes" name="fattyliver" value="yes" required> Yes
+        <input type="radio" id="fattyliverNo" name="fattyliver" value="no" required> No<br>
+
+        <label for="kidney">Do you have kidney problem?</label><br>
+        <input type="radio" id="kidneyYes" name="kidney" value="yes" required> Yes
+        <input type="radio" id="kidneyNo" name="kidney" value="no" required> No<br>
+
+        <label for="heartproblem">Do you have Heart problem?</label><br>
+        <input type="radio" id="heartproblemYes" name="heartproblem" value="yes" required> Yes
+        <input type="radio" id="heartproblemNo" name="heartproblem" value="no" required> No<br>
+
         <button type="submit">Register</button>
     </form>
     <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>

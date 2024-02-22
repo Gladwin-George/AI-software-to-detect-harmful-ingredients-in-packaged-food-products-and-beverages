@@ -21,7 +21,14 @@ cursor.execute('''
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        obese TEXT NOT NULL,
+        diabetes TEXT NOT NULL,
+        highbp TEXT NOT NULL,
+        highcholesterol TEXT NOT NULL,
+        fattyliver TEXT NOT NULL,
+        kidney TEXT NOT NULL,
+        heartproblem TEXT NOT NULL
     )
 ''')
 conn.commit()
@@ -85,13 +92,19 @@ def register():
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
+        obese = request.form['obese']
+        diabetes = request.form['diabetes']
+        highbp = request.form['highbp']
+        highcholesterol = request.form['highcholesterol']
+        fattyliver = request.form['fattyliver']
+        kidney = request.form['kidney']
+        heartproblem = request.form['heartproblem']
 
         # Check if the email is already registered
         conn = sqlite3.connect('users.db')
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
         existing_user = cursor.fetchone()
-        conn.close()
 
         if existing_user:
             error = 'Email is already registered'
@@ -99,10 +112,11 @@ def register():
             # Hash the password
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-            # Insert the user into the database
+            # Insert the user into the database with additional information
             conn = sqlite3.connect('users.db')
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", (name, email, hashed_password))
+            cursor.execute("INSERT INTO users (name, email, password, obese, diabetes, highbp, highcholesterol, fattyliver, kidney, heartproblem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                           (name, email, hashed_password, obese, diabetes, highbp, highcholesterol, fattyliver, kidney, heartproblem))
             conn.commit()
             conn.close()
 
