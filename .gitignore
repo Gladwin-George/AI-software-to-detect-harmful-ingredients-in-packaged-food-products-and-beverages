@@ -170,3 +170,6 @@ sql codes
 
 #folder to try database working
 database try/
+
+#folder to store extra databases
+extra databases/ 
