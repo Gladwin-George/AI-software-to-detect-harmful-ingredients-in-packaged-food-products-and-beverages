@@ -26,11 +26,12 @@ cursor.execute('''
         password TEXT NOT NULL,
         obese TEXT NOT NULL,
         diabetes TEXT NOT NULL,
-        highbp TEXT NOT NULL,
-        highcholesterol TEXT NOT NULL,
-        fattyliver TEXT NOT NULL,
+        high_bp TEXT NOT NULL,
+        high_cholesterol TEXT NOT NULL,
+        fatty_liver TEXT NOT NULL,
         kidney TEXT NOT NULL,
-        heartproblem TEXT NOT NULL
+        heart_problem TEXT NOT NULL,
+        lactose_intolerance TEXT NOT NULL
     )
 ''')
 conn.commit()
@@ -98,11 +99,12 @@ def register():
         password = request.form['password']
         obese = request.form['obese']
         diabetes = request.form['diabetes']
-        highbp = request.form['highbp']
-        highcholesterol = request.form['highcholesterol']
-        fattyliver = request.form['fattyliver']
+        high_bp = request.form['high_bp']
+        high_cholesterol = request.form['high_cholesterol']
+        fatty_liver = request.form['fatty_liver']
         kidney = request.form['kidney']
-        heartproblem = request.form['heartproblem']
+        heart_problem = request.form['heart_problem']
+        lactose_intolerance = request.form['lactose_intolerance']
 
         # Check if the email is already registered
         conn = sqlite3.connect('users.db')
@@ -119,8 +121,8 @@ def register():
             # Insert the user into the database with additional information
             conn = sqlite3.connect('users.db')
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO users (name, email, age, gender, password, obese, diabetes, highbp, highcholesterol, fattyliver, kidney, heartproblem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                           (name, email, age, gender, hashed_password, obese, diabetes, highbp, highcholesterol, fattyliver, kidney, heartproblem))
+            cursor.execute("INSERT INTO users (name, email, age, gender, password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney, heart_problem, lactose_intolerance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                           (name, email, age, gender, hashed_password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney, heart_problem, lactose_intolerance))
             conn.commit()
             conn.close()
 
@@ -155,5 +157,3 @@ def login():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-    
