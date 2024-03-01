@@ -173,3 +173,6 @@ database try/
 
 #folder to store extra databases
 extra databases/ 
+
+#harmful ingredients database
+harmful_ingredients.db

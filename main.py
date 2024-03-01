@@ -64,6 +64,7 @@ def index():
             reader = easyocr.Reader(['en'])
             text_results = reader.readtext(filename)
             extracted_text = ' '.join([result[1] for result in text_results])
+            print(f'Extracted text: {extracted_text}')
 
             # Step 2: Load harmful ingredients from SQLite database into a dictionary
             harmful_ingredients_dict = {}
@@ -71,8 +72,8 @@ def index():
             cursor = conn.cursor()
             cursor.execute("SELECT * FROM harmful_ingredients")
             for row in cursor.fetchall():
-                        ingredient_name = row[0].strip()  # Assuming ingredient name is in the first column
-                        harmful_ingredient_description = row[1].strip()  # Assuming harmful ingredient description is in the second column
+                        ingredient_name = row[1].strip()  # Assuming ingredient name is in the first column
+                        harmful_ingredient_description = row[2].strip()  # Assuming harmful ingredient description is in the second column
                         harmful_ingredients_dict[ingredient_name.lower()] = harmful_ingredient_description
             conn.close()
 
@@ -80,6 +81,7 @@ def index():
             for ingredient_name, description in harmful_ingredients_dict.items():
                 if ingredient_name in extracted_text.lower():
                     harmful_ingredients.append((ingredient_name, description))
+                    print(f'Found harmful ingredient: {ingredient_name} - {description}')
 
             os.remove(filename)  # Remove the uploaded image
 
