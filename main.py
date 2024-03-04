@@ -155,13 +155,32 @@ def login():
             # Check password hash
             if bcrypt.checkpw(password.encode('utf-8'), user[5]):
                 session['user_id'] = user[0]  # Store user ID in session
-                return redirect(url_for('index'))
+                return redirect(url_for('user'))
 
         # Invalid credentials or user does not exist
         return render_template('login.html', error='Invalid email or password')
 
     return render_template('login.html')
 
+@app.route('/user', methods=['GET'])
+def user():
+    # Check if the user is logged in
+    if 'user_id' in session:
+        # Retrieve the user from the database
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE id = ?", (session['user_id'],))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user:
+            # Pass the user data to the template
+            return render_template('user.html', user=user)
+
+    # If the user is not logged in, redirect to the login page
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
