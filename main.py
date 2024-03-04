@@ -162,7 +162,7 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/user', methods=['GET'])
+@app.route('/user', methods=['GET', 'POST'])
 def user():
     # Check if the user is logged in
     if 'user_id' in session:
@@ -174,8 +174,25 @@ def user():
         conn.close()
 
         if user:
-            # Pass the user data to the template
-            return render_template('user.html', user=user)
+            harmful_ingredients = []
+            if request.method == 'POST':
+                # Check if a file was uploaded
+                if 'file' not in request.files:
+                    error = "No file uploaded"
+                    return render_template('user.html', user=user, error=error)
+
+                file = request.files['file']
+
+                # If the user does not select a file, the browser submits an empty file without a filename
+                if file.filename == '':
+                    error = "No selected file"
+                    return render_template('user.html', user=user, error=error)
+
+                # If the file exists and is allowed, proceed with OCR and detection
+                harmful_ingredients = analyze_harmful_ingredients(file)
+
+            # Pass the user data and the harmful ingredients to the template
+            return render_template('user.html', user=user, harmful_ingredients=harmful_ingredients)
 
     # If the user is not logged in, redirect to the login page
     return redirect(url_for('login'))
