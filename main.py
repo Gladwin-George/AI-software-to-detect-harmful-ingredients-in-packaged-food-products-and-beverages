@@ -29,7 +29,7 @@ cursor.execute('''
         high_bp TEXT NOT NULL,
         high_cholesterol TEXT NOT NULL,
         fatty_liver TEXT NOT NULL,
-        kidney TEXT NOT NULL,
+        kidney_problem TEXT NOT NULL,
         heart_problem TEXT NOT NULL,
         lactose_intolerance TEXT NOT NULL
     )
@@ -110,7 +110,7 @@ def register():
         high_bp = request.form['high_bp']
         high_cholesterol = request.form['high_cholesterol']
         fatty_liver = request.form['fatty_liver']
-        kidney = request.form['kidney']
+        kidney_problem = request.form['kidney_problem']
         heart_problem = request.form['heart_problem']
         lactose_intolerance = request.form['lactose_intolerance']
 
@@ -129,8 +129,8 @@ def register():
             # Insert the user into the database with additional information
             conn = sqlite3.connect('users.db')
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO users (name, email, age, gender, password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney, heart_problem, lactose_intolerance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                           (name, email, age, gender, hashed_password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney, heart_problem, lactose_intolerance))
+            cursor.execute("INSERT INTO users (name, email, age, gender, password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                           (name, email, age, gender, hashed_password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance))
             conn.commit()
             conn.close()
 
