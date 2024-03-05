@@ -38,7 +38,64 @@ conn.commit()
 conn.close()
 
 #
-def analyze_harmful_ingredients(file):
+# def analyze_harmful_ingredients2(file):
+#     filename = 'uploaded_image.jpg'
+#     file.save(filename)
+
+#     # Step 1: Extract text from the image
+#     img = cv2.imread(filename)
+#     reader = easyocr.Reader(['en'])
+#     text_results = reader.readtext(filename)
+#     extracted_text = ' '.join([result[1] for result in text_results])
+#     print(f'Extracted text: {extracted_text}')
+
+#     # Step 2: Load harmful ingredients from SQLite database into a dictionary
+#     harmful_ingredients_dict = {}
+#     conn = sqlite3.connect('harmful_ingredients.db')
+#     cursor = conn.cursor()
+#     cursor.execute("SELECT * FROM harmful_ingredients")
+#     for row in cursor.fetchall():
+#         ingredient_name = row[1].strip()  # Assuming ingredient name is in the first column
+#         harmful_ingredient_description = row[2].strip()  # Assuming harmful ingredient description is in the second column
+#         harmful_ingredients_dict[ingredient_name.lower()] = harmful_ingredient_description
+#     conn.close()
+
+#     # Step 3: Identify harmful ingredients
+#     harmful_ingredients = []
+#     for ingredient_name, description in harmful_ingredients_dict.items():
+#         if ingredient_name in extracted_text.lower():
+#             harmful_ingredients.append((ingredient_name, description))
+#             print(f'Found harmful ingredient: {ingredient_name} - {description}')
+
+#     os.remove(filename)  # Remove the uploaded image
+
+#     return harmful_ingredients
+
+
+def get_harmful_ingredients(user_profile):
+    conn = sqlite3.connect('harmful_ingredients.db')
+    cursor = conn.cursor()
+    query = '''
+        SELECT name
+        FROM harmful_ingredients
+        WHERE (
+            (age_min <= ? OR age_min IS NULL) AND
+            (age_max >= ? OR age_max IS NULL) AND
+            (gender = ? OR gender = 'both') AND
+            ((obese = 'yes' AND ? = 'yes') OR 
+            (diabetes = 'yes' AND ? = 'yes') OR 
+            (high_bp = 'yes' AND ? = 'yes') OR 
+            (high_cholesterol = 'yes' AND ? = 'yes') OR 
+            (fatty_liver = 'yes' AND ? = 'yes') OR 
+            (kidney_problem = 'yes' AND ? = 'yes') OR 
+            (heart_problem = 'yes' AND ? = 'yes') OR 
+            (lactose_intolerance = 'yes' AND ? = 'yes'))
+        )
+    '''
+    cursor.execute(query, (user_profile[3], user_profile[3], user_profile[4], user_profile[6], user_profile[7], user_profile[8], user_profile[9], user_profile[10], user_profile[11], user_profile[12], user_profile[13]))
+    return cursor.fetchall()
+
+def analyze_harmful_ingredients(file, user_profile):
     filename = 'uploaded_image.jpg'
     file.save(filename)
 
@@ -67,10 +124,24 @@ def analyze_harmful_ingredients(file):
             harmful_ingredients.append((ingredient_name, description))
             print(f'Found harmful ingredient: {ingredient_name} - {description}')
 
+    # Step 4: Filter harmful ingredients based on user profile
+    harmful_ingredients_for_user = get_harmful_ingredients(user_profile)
+    harmful_ingredients_for_user_names = [ingredient[0] for ingredient in harmful_ingredients_for_user]
+    user_based_harmful_ingredients = [ingredient for ingredient in harmful_ingredients if ingredient[0] in harmful_ingredients_for_user_names]
+
+    # Print the harmful ingredients for user
+    print(f'Harmful ingredients for user: {harmful_ingredients_for_user_names}')
+
+    user_based_harmful_ingredients = [ingredient for ingredient in harmful_ingredients if ingredient[0] in harmful_ingredients_for_user_names]
+
+    # Print the user-based harmful ingredients in the terminal
+    for ingredient in user_based_harmful_ingredients:
+        print(f'Found user-based harmful ingredient: {ingredient[0]} - {ingredient[1]}')
+
     os.remove(filename)  # Remove the uploaded image
 
-    return harmful_ingredients
-
+    return user_based_harmful_ingredients
+    
 @app.route('/', methods=['GET', 'POST'])
 def index():
     error = None
@@ -179,17 +250,17 @@ def user():
                 # Check if a file was uploaded
                 if 'file' not in request.files:
                     error = "No file uploaded"
-                    return render_template('user.html', user=user, error=error)
+                    return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients)
 
                 file = request.files['file']
 
                 # If the user does not select a file, the browser submits an empty file without a filename
                 if file.filename == '':
                     error = "No selected file"
-                    return render_template('user.html', user=user, error=error)
+                    return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients)
 
                 # If the file exists and is allowed, proceed with OCR and detection
-                harmful_ingredients = analyze_harmful_ingredients(file)
+                harmful_ingredients = analyze_harmful_ingredients(file, user)
 
             # Pass the user data and the harmful ingredients to the template
             return render_template('user.html', user=user, harmful_ingredients=harmful_ingredients)
