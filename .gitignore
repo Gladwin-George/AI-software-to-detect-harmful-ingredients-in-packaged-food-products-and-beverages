@@ -174,5 +174,6 @@ database try/
 #folder to store extra databases
 extra databases/ 
 
-#harmful ingredients database
+#harmful ingredients databases to try codes
 harmful_ingredients.db
+try_harmful_ingredients.db
