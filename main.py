@@ -119,19 +119,16 @@ def analyze_harmful_ingredients(file, user_profile):
 
     # Step 3: Identify harmful ingredients
     harmful_ingredients = []
+    extracted_text_words = set(extracted_text.lower().split())
     for ingredient_name, description in harmful_ingredients_dict.items():
-        if ingredient_name in extracted_text.lower():
+        ingredient_name_words = ingredient_name.split()
+        if any(word in extracted_text_words for word in ingredient_name_words):
             harmful_ingredients.append((ingredient_name, description))
             print(f'Found harmful ingredient: {ingredient_name} - {description}')
 
     # Step 4: Filter harmful ingredients based on user profile
     harmful_ingredients_for_user = get_harmful_ingredients(user_profile)
-    harmful_ingredients_for_user_names = [ingredient[0] for ingredient in harmful_ingredients_for_user]
-    user_based_harmful_ingredients = [ingredient for ingredient in harmful_ingredients if ingredient[0] in harmful_ingredients_for_user_names]
-
-    # Print the harmful ingredients for user
-    print(f'Harmful ingredients for user: {harmful_ingredients_for_user_names}')
-
+    harmful_ingredients_for_user_names = [ingredient[0].lower() for ingredient in harmful_ingredients_for_user]
     user_based_harmful_ingredients = [ingredient for ingredient in harmful_ingredients if ingredient[0] in harmful_ingredients_for_user_names]
 
     # Print the user-based harmful ingredients in the terminal
@@ -141,7 +138,7 @@ def analyze_harmful_ingredients(file, user_profile):
     os.remove(filename)  # Remove the uploaded image
 
     return user_based_harmful_ingredients
-    
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     error = None
