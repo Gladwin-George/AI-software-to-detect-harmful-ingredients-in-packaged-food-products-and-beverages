@@ -38,38 +38,38 @@ conn.commit()
 conn.close()
 
 #
-# def analyze_harmful_ingredients2(file):
-#     filename = 'uploaded_image.jpg'
-#     file.save(filename)
+def analyze_general_harmful_ingredients(file):
+    filename = 'uploaded_image.jpg'
+    file.save(filename)
 
-#     # Step 1: Extract text from the image
-#     img = cv2.imread(filename)
-#     reader = easyocr.Reader(['en'])
-#     text_results = reader.readtext(filename)
-#     extracted_text = ' '.join([result[1] for result in text_results])
-#     print(f'Extracted text: {extracted_text}')
+    # Step 1: Extract text from the image
+    img = cv2.imread(filename)
+    reader = easyocr.Reader(['en'])
+    text_results = reader.readtext(filename)
+    extracted_text = ' '.join([result[1] for result in text_results])
+    print(f'Extracted text: {extracted_text}')
 
-#     # Step 2: Load harmful ingredients from SQLite database into a dictionary
-#     harmful_ingredients_dict = {}
-#     conn = sqlite3.connect('harmful_ingredients.db')
-#     cursor = conn.cursor()
-#     cursor.execute("SELECT * FROM harmful_ingredients")
-#     for row in cursor.fetchall():
-#         ingredient_name = row[1].strip()  # Assuming ingredient name is in the first column
-#         harmful_ingredient_description = row[2].strip()  # Assuming harmful ingredient description is in the second column
-#         harmful_ingredients_dict[ingredient_name.lower()] = harmful_ingredient_description
-#     conn.close()
+    # Step 2: Load harmful ingredients from SQLite database into a dictionary
+    harmful_ingredients_dict = {}
+    conn = sqlite3.connect('harmful_ingredients.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM harmful_ingredients")
+    for row in cursor.fetchall():
+        ingredient_name = row[1].strip()  # Assuming ingredient name is in the first column
+        harmful_ingredient_description = row[2].strip()  # Assuming harmful ingredient description is in the second column
+        harmful_ingredients_dict[ingredient_name.lower()] = harmful_ingredient_description
+    conn.close()
 
-#     # Step 3: Identify harmful ingredients
-#     harmful_ingredients = []
-#     for ingredient_name, description in harmful_ingredients_dict.items():
-#         if ingredient_name in extracted_text.lower():
-#             harmful_ingredients.append((ingredient_name, description))
-#             print(f'Found harmful ingredient: {ingredient_name} - {description}')
+    # Step 3: Identify harmful ingredients
+    harmful_ingredients = []
+    for ingredient_name, description in harmful_ingredients_dict.items():
+        if ingredient_name in extracted_text.lower():
+            harmful_ingredients.append((ingredient_name, description))
+            print(f'Found harmful ingredient: {ingredient_name} - {description}')
 
-#     os.remove(filename)  # Remove the uploaded image
+    os.remove(filename)  # Remove the uploaded image
 
-#     return harmful_ingredients
+    return harmful_ingredients
 
 
 def get_harmful_ingredients(user_profile):
@@ -159,7 +159,7 @@ def index():
 
         # If the file exists and is allowed, proceed with OCR and detection
         if file and not error:
-            harmful_ingredients = analyze_harmful_ingredients(file)
+            harmful_ingredients = analyze_general_harmful_ingredients(file)
 
         return jsonify({'error': error, 'harmful_ingredients': harmful_ingredients})
 
