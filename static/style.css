@@ -20,7 +20,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
-    padding: 14px 16px;
+    padding: 0px 16px;
 }
 
 /* Reset the list style */
@@ -61,8 +61,53 @@ nav {
     background: linear-gradient(108.7deg, rgb(34, 219, 231) -0.9%, rgb(52, 118, 246) 88.7%);
     height: 100vh;
     width: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
 }
 
+.home_image img{
+    width: 400px;
+    height: 400px;
+    filter: drop-shadow(0 0 2.75rem rgb(255, 255, 255));
+}
+.home_info h1{
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 100%;
+}
+
+/* Style the buttons */
+.home_info button {
+    background-color: rgb(0, 110, 255); /* Button color */
+    color: white; /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    border: 1px solid; /* Remove borders */
+    border-color: #001aff;
+    padding: 10px 32px; /* Button size */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer; /* Change cursor when hovering over the button */
+    transition: background-color 0.3s ease; /* Add transition effect */
+}
+
+/* Change button color on hover */
+.home_info button:hover {
+    background-color: #00c3ff;
+    border-color: #ffffff;
+
+}
+
+/* Style the links inside the buttons */
+.home_info button a {
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline */
+}
 #detect_ingredients{
     background: linear-gradient(108.7deg, rgb(20, 238, 0) -0.9%, rgb(52, 118, 246) 88.7%);
     height: 100vh;
@@ -101,4 +146,28 @@ nav {
     background-color: coral;
     height: 150px;
     overflow-y: auto;
+}
+
+
+/* Add this to your CSS file */
+
+/* This will change the scrollbar for the whole page */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(0, 153, 255) #ffffff;
+}
+
+/* For Webkit browsers like Chrome and Safari */
+body::-webkit-scrollbar {
+    width: 12px; /* Adjust scrollbar width */
+}
+
+body::-webkit-scrollbar-track {
+    background: #ffffff; /* Adjust scrollbar track color */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 153, 255); /* Adjust scrollbar thumb color */
+    border-radius: 20px; /* Make it round */
+    border: 3px solid #ffffff; /* Add a border */
 }

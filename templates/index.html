@@ -24,14 +24,24 @@
     </nav>
 
     <section id="home">
-        
-        <button>
-            <a href="{{ url_for('login') }}">Login</a>
-        </button>
 
-        <button>
-            <a href="{{ url_for('register') }}">Register</a>
-        </button>
+        <div class="home_info">
+            <h1>FIND THE HARMFUL INGREDIENT <br> IN YOUR FOOD PRODUCTS</h1> <br>
+            <p>Login or Register to identify harmful ingredients tailored to your health profile. <br>Simply upload an image of the food's ingredient list of the food product to detect any potential hazards.</p>
+            <br>
+
+            <button>
+                <a href="{{ url_for('login') }}">Login</a>
+            </button>
+    
+            <button>
+                <a href="{{ url_for('register') }}">Register</a>
+            </button>
+        </div>
+
+        <div class="home_image">
+            <img src="static\images\home_image.png" alt="Home Image">
+        </div>
 
     </section>
 
