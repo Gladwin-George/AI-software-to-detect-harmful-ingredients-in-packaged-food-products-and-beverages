@@ -16,11 +16,16 @@ html, body {
 
 /* Style the nav */
 nav {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
     padding: 0px 16px;
+    position: fixed;
+    z-index: 1;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Add this line */
+
 }
 
 /* Reset the list style */
@@ -37,9 +42,10 @@ nav {
 
 /* Style the links */
 .nav-links li a {
-    color: rgb(0, 153, 255);
+    color: rgb(0, 119, 199);
     text-decoration: none;
     padding: 0 16px;
+    font-weight: 550;
 }
 
 /* Change color on hover */
@@ -77,6 +83,12 @@ nav {
     font-size: 3rem;
     font-weight: bold;
     line-height: 100%;
+}
+
+.home_info p{
+    color: rgb(0, 0, 0);
+    font-size: 1.1rem;
+    line-height: 150%;
 }
 
 /* Style the buttons */
