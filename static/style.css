@@ -14,6 +14,61 @@ html, body {
     background-color: #f4f4f4;
 }
 
+/* Style the nav */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 14px 16px;
+}
+
+/* Reset the list style */
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+}
+
+/* Create horizontal list */
+.nav-links li {
+    float: left;
+}
+
+/* Style the links */
+.nav-links li a {
+    color: rgb(0, 153, 255);
+    text-decoration: none;
+    padding: 0 16px;
+}
+
+/* Change color on hover */
+.nav-links li a:hover {
+    color: #ffffff;
+    background-color:  rgb(0, 153, 255);
+    padding: 10px 20px; /* Adjust as needed */
+
+}
+
+/* Style the logo */
+.logo h4 {
+    color: rgb(0, 153, 255);
+    text-align: left;
+    padding: 14px 16px;
+}
+
+#home{
+    background: linear-gradient(108.7deg, rgb(34, 219, 231) -0.9%, rgb(52, 118, 246) 88.7%);
+    height: 100vh;
+    width: auto;
+}
+
+#detect_ingredients{
+    background: linear-gradient(108.7deg, rgb(20, 238, 0) -0.9%, rgb(52, 118, 246) 88.7%);
+    height: 100vh;
+    width: auto;
+}
+
 .container{
     background-color: black;
     margin: 50px;

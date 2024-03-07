@@ -7,21 +7,25 @@
     <h1>Welcome to the User Page</h1>
     <p>This is a user-based page.</p>
 
-    <h2>User Information</h2>
-    <ul>
-        <li>Name: {{ user[1] }}</li>
-        <li>Email: {{ user[2] }}</li>
-        <li>Age: {{ user[3] }}</li>
-        <li>Gender: {{ user[4] }}</li>
-        <li>Obese: {{ user[6] }}</li>
-        <li>Diabetes: {{ user[7] }}</li>
-        <li>High BP: {{ user[8] }}</li>
-        <li>High Choloestrol: {{ user[9] }}</li>
-        <li>Fatty Liver: {{ user[10] }}</li>
-        <li>Kidney: {{ user[11] }}</li>
-        <li>Heart Problem: {{ user[12] }}</li>
-        <li>Lactose Intolerance: {{ user[13] }}</li>
-    </ul>
+    <div class="user_info">
+        <h2>User Information</h2>
+
+        <ul>
+            <li>Name: {{ user[1] }}</li>
+            <li>Email: {{ user[2] }}</li>
+            <li>Age: {{ user[3] }}</li>
+            <li>Gender: {{ user[4] }}</li>
+            <li>Obese: {{ user[6] }}</li>
+            <li>Diabetes: {{ user[7] }}</li>
+            <li>High BP: {{ user[8] }}</li>
+            <li>High Choloestrol: {{ user[9] }}</li>
+            <li>Fatty Liver: {{ user[10] }}</li>
+            <li>Kidney: {{ user[11] }}</li>
+            <li>Heart Problem: {{ user[12] }}</li>
+            <li>Lactose Intolerance: {{ user[13] }}</li>
+        </ul>
+        
+    </div>
 
     <h2>Analyze Harmful Ingredients</h2>
     <form method="POST" enctype="multipart/form-data">
@@ -30,7 +34,7 @@
     </form>
 
     {% if harmful_ingredients %}
-        <h2>Harmful Ingredients Found</h2>
+        <h2>Harmful Ingredients found for user</h2>
         <ul>
             {% for ingredient in harmful_ingredients %}
                 <li>{{ ingredient[0] }} - {{ ingredient[1] }}</li>
