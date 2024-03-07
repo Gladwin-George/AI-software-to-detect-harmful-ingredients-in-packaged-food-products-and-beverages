@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OCR and Ingredient Detection</title>
-    <link rel="stylesheet" href="static\style.css">
+    <link rel="stylesheet" href="static\css\style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="static/js/main.js"></script>
 </head>
 <body>
     <nav>
@@ -78,42 +79,6 @@
     <section id="contact">
 
     </section>
-    
-    <script>
-        $(document).ready(function(){
-            $("form").on("submit", function(event){
-                event.preventDefault();
-        
-                var formData = new FormData(this);
-        
-                $.ajax({
-                    url: '/',
-                    type: 'POST',
-                    data: formData,
-                    success: function(data){
-                        // Clear any existing error message and harmful ingredients
-                        $('.error').text('');
-                        $('#harmful-ingredients-list').empty();
-        
-                        // Display the error message, if any
-                        if (data.error) {
-                            $('.error').text(data.error);
-                        }
-        
-                        // Display the harmful ingredients, if any
-                        if (data.harmful_ingredients.length > 0) {
-                            $.each(data.harmful_ingredients, function(i, ingredient) {
-                                $('#harmful-ingredients-list').append('<li>' + ingredient[0] + ' - ' + ingredient[1] + '</li>');
-                            });
-                        }
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                });
-            });
-        });
-    </script>
 
 </body>
 </html>

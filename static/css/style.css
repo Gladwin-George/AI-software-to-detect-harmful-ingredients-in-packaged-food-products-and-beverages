@@ -64,14 +64,16 @@ nav {
 }
 
 #home{
-    background: linear-gradient(108.7deg, rgb(34, 219, 231) -0.9%, rgb(52, 118, 246) 88.7%);
-    height: 100vh;
+    position: relative;
+    background: rgb(0,212,255);
+    background: linear-gradient(0deg, rgba(0,212,255,0) 0%, rgba(0,196,248,1) 21%, rgba(0,155,255,1) 62%);    height: 100vh;
     width: auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 20px;
 }
+
 
 .home_image img{
     width: 400px;
@@ -120,24 +122,27 @@ nav {
     color: white; /* Text color */
     text-decoration: none; /* Remove underline */
 }
+
 #detect_ingredients{
-    background: linear-gradient(108.7deg, rgb(20, 238, 0) -0.9%, rgb(52, 118, 246) 88.7%);
     height: 100vh;
     width: auto;
+    padding-top: 100px; /* Add this line */
+    margin-top: 0; /* Change this line */
 }
 
 .container{
+    display: flex;
     background-color: black;
     margin: 50px;
     padding: 20px;
 }
 
 .container-1 {
-    height: 100px;
+    height: 200px;
     width: 100%;
     border: 1px solid #ccc;
     padding: 10px;
-    margin-top: 20px;
+    margin-right: 50px;
     background-color: rgb(255, 81, 0);
     color: white;
     border-radius: 15px;
@@ -145,22 +150,30 @@ nav {
 }
 
 .container-2 {
-    height: 200px;
+    height: 400px;
     width: 100%;
-    padding-left: 30px;
-    margin-top: 20px;
+    padding: 10px;
     background-color: rgb(4, 205, 255);
     color: white;
     border-radius: 15px;
 }
 
 #harmful-ingredients-list {
-    background-color: coral;
-    height: 150px;
+    background-color: rgb(255, 255, 255);
+    height: 300px;
     overflow-y: auto;
 }
 
-
+#contact{
+    height: 300px;
+    width: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(0, 153, 255);
+    color: white;
+}
 /* Add this to your CSS file */
 
 /* This will change the scrollbar for the whole page */
