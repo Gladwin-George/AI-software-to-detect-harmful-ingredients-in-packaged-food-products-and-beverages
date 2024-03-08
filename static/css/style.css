@@ -11,7 +11,7 @@ html, body {
     font-size: 16px;
     line-height: 1.6;
     color: #333;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
 }
 
 /* Style the nav */
@@ -24,7 +24,7 @@ nav {
     padding: 0px 16px;
     position: fixed;
     z-index: 1;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Add this line */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
 
 }
 
@@ -52,7 +52,8 @@ nav {
 .nav-links li a:hover {
     color: #ffffff;
     background-color:  rgb(0, 153, 255);
-    padding: 10px 20px; /* Adjust as needed */
+    padding: 10px 20px; 
+    border-radius: 20px; 
 
 }
 
@@ -95,19 +96,19 @@ nav {
 
 /* Style the buttons */
 .home_info button {
-    background-color: rgb(0, 110, 255); /* Button color */
-    color: white; /* Text color */
-    border-radius: 20px; /* Rounded corners */
-    border: 1px solid; /* Remove borders */
+    background-color: rgb(0, 110, 255); 
+    color: white; 
+    border-radius: 20px; 
+    border: 1px solid; 
     border-color: #001aff;
-    padding: 10px 32px; /* Button size */
-    text-align: center; /* Center the text */
-    text-decoration: none; /* Remove underline */
+    padding: 10px 32px; 
+    text-align: center; 
+    text-decoration: none; 
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    cursor: pointer; /* Change cursor when hovering over the button */
-    transition: background-color 0.3s ease; /* Add transition effect */
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
 }
 
 /* Change button color on hover */
@@ -119,48 +120,163 @@ nav {
 
 /* Style the links inside the buttons */
 .home_info button a {
-    color: white; /* Text color */
-    text-decoration: none; /* Remove underline */
+    color: white; 
+    text-decoration: none; 
 }
 
 #detect_ingredients{
     height: 100vh;
     width: auto;
-    padding-top: 100px; /* Add this line */
-    margin-top: 0; /* Change this line */
+    padding-top: 100px; 
+    margin-top: 0; 
+    position: relative;
+    overflow: hidden; 
 }
 
 .container{
     display: flex;
-    background-color: black;
     margin: 50px;
     padding: 20px;
+    
 }
 
 .container-1 {
-    height: 200px;
-    width: 100%;
+    height: 400px;
+    width: 500px;
     border: 1px solid #ccc;
     padding: 10px;
     margin-right: 50px;
-    background-color: rgb(255, 81, 0);
-    color: white;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border: rgb(4, 205, 255) 4px solid;
     border-radius: 15px;
-
+    box-shadow: 5px 8px 10px #6cdafc;
 }
+
+.container-1 h1{
+    margin-left: 10px;
+}
+
+.container-1 input[type="file"] {
+    /* Style for the file input */
+    border: 1px solid #ddd;
+    padding: 10px;
+    color: #888;
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+.container-1 input[type="submit"] {
+    /* Style for the submit button */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.container-1 input[type="submit"]:hover {
+    /* Style for the submit button on hover */
+    background-color: #0099ff;
+}
+
+
+.upload-btn-wrapper {
+    position: relative;
+    width: 350px; 
+    height: 230px;
+    border: 4px dashed #00cbfd;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #00c3ff5d;
+}
+
+.upload-btn-wrapper input[type="file"] {
+    display: none;
+}
+
+.upload-btn-wrapper label {
+    color: #015752;
+    font-size: large;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
 
 .container-2 {
     height: 400px;
     width: 100%;
     padding: 10px;
-    background-color: rgb(4, 205, 255);
-    color: white;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: rgb(4, 205, 255) 4px solid;
     border-radius: 15px;
+    box-shadow: 5px 8px 10px #6cdafc;
+    position: relative;
+
+}
+
+.container-2::after {
+    content: "";
+    position: absolute;
+    top: -20px; 
+    right: -250px; 
+    width: 250px; 
+    height: 250px; 
+    border-radius: 50%;
+    background: #00b7ff; 
+    filter: blur(100px); 
+    z-index: -1;
+}
+
+.container-2::before {
+    content: "";
+    position: absolute;
+    bottom: -150px; 
+    left: -850px; 
+    width: 450px; 
+    height: 450px; 
+    border-radius: 50%;
+    background: #00b7ff; 
+    filter: blur(150px); 
+    z-index: -1;
+}
+
+.container-2 h2{
+    margin-left: 10px;
 }
 
 #harmful-ingredients-list {
-    background-color: rgb(255, 255, 255);
-    height: 300px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: rgba(0, 204, 255, 0.466);
+    height: 320px;
+    border-radius: 15px;
     overflow-y: auto;
 }
 
@@ -174,7 +290,10 @@ nav {
     background-color: rgb(0, 153, 255);
     color: white;
 }
-/* Add this to your CSS file */
+#about{
+    height: 100vh;
+    background-color: #ffffff;
+}
 
 /* This will change the scrollbar for the whole page */
 html {
@@ -184,15 +303,15 @@ html {
 
 /* For Webkit browsers like Chrome and Safari */
 body::-webkit-scrollbar {
-    width: 12px; /* Adjust scrollbar width */
+    width: 12px; 
 }
 
 body::-webkit-scrollbar-track {
-    background: #ffffff; /* Adjust scrollbar track color */
+    background: #ffffff; 
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: rgb(0, 153, 255); /* Adjust scrollbar thumb color */
-    border-radius: 20px; /* Make it round */
-    border: 3px solid #ffffff; /* Add a border */
+    background-color: rgb(0, 153, 255);
+    border-radius: 20px; 
+    border: 3px solid #ffffff; 
 }

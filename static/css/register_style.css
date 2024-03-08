@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.register-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.1);
+    width: 500px;
+    height: 540px; 
+    box-sizing: border-box; 
+    overflow-y: auto;
+}
+
+.register-title {
+    margin: 0 0 20px 0;
+}
+
+.error-message {
+    color: red;
+}
+
+.register-form .form-group {
+    margin-bottom: 10px;
+}
+
+.register-form label {
+    display: block;
+}
+
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="number"],
+.register-form input[type="password"],
+.register-form select,
+.register-form input[type="radio"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: #007BFF;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.login-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.register-form input[type="radio"] {
+    width: auto;
+}
+
+.question_para p{
+    margin-top: 40px;
+    font-weight: bold;
+}
+
+.question {
+    display: flex;
+    justify-content: space-between;
+}
+
+.options {
+    display: flex;
+    gap: 10px;
+}
+
+/* For Webkit browsers like Chrome and Safari */
+::-webkit-scrollbar {
+    width: 12px; 
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 153, 255);
+    border: 3px solid #ffffff; 
+}

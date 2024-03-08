@@ -4,67 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="static\css\register_style.css">
 </head>
 <body>
-    <h2>Register</h2>
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
-    <form method="POST" action="{{ url_for('register') }}">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br>
+    <div class="main-container">
+        <h2 class="register-title">REGISTER</h2>
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
+        <div class="register-container">
+            <form method="POST" action="{{ url_for('register') }}" class="register-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
 
-        <label for="age">Age:</label><br>
-        <input type="number" id="age" name="age" required><br>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required>
+                </div>  
 
-        <label for="gender">Gender:</label><br>
-        <select id="gender" name="gender" required>
-            <option value="">Select...</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select><br>
-        
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
+                <div class="form-group">
+                    <label for="gender">Gender:</label><br>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select...</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
 
-        <label for="obese">Are you obese?</label><br>
-        <input type="radio" id="obeseYes" name="obese" value="yes" required> Yes
-        <input type="radio" id="obeseNo" name="obese" value="no" required> No<br>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
 
-        <label for="diabetes">Do you have diabetes?</label><br>
-        <input type="radio" id="diabetesYes" name="diabetes" value="yes" required> Yes
-        <input type="radio" id="diabetesNo" name="diabetes" value="no" required> No<br>
+                <div class="question_para">
+                    <p>Please answer the following questions regarding your health.</p>
+                </div>
 
-        <label for="high_bp">Do you have high blood pressure?</label><br>
-        <input type="radio" id="high_bpYes" name="high_bp" value="yes" required> Yes
-        <input type="radio" id="high_bpNo" name="high_bp" value="no" required> No<br>
+                <div class="form-group obese_div">
+                    <div class="question">
+                        <label for="obese">Are you obese?</label>
+                        <div class="options">
+                            <input type="radio" id="obeseYes" name="obese" value="yes" required> Yes
+                            <input type="radio" id="obeseNo" name="obese" value="no" required> No
+                        </div>
+                    </div>
+                </div>
 
-        <label for="high_cholesterol">Do you have high cholesterol?</label><br>
-        <input type="radio" id="high_cholesterolYes" name="high_cholesterol" value="yes" required> Yes
-        <input type="radio" id="high_cholesterolNo" name="high_cholesterol" value="no" required> No<br>
+                <div class="form-group">
+                    <div class="question">
+                        <label for="diabetes">Do you have diabetes?</label>
+                        <div class="options">
+                            <input type="radio" id="diabetesYes" name="diabetes" value="yes" required> Yes
+                            <input type="radio" id="diabetesNo" name="diabetes" value="no" required> No
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="question">
+                        <label for="high_bp">Do you have high blood pressure?</label>
+                        <div class="options">
+                            <input type="radio" id="high_bpYes" name="high_bp" value="yes" required> Yes
+                            <input type="radio" id="high_bpNo" name="high_bp" value="no" required> No   
+                        </div>
+                    </div>
+                </div>
 
-        <label for="fatty_liver">Do you have Fatty liver?</label><br>
-        <input type="radio" id="fatty_liverYes" name="fatty_liver" value="yes" required> Yes
-        <input type="radio" id="fatty_liverNo" name="fatty_liver" value="no" required> No<br>
+                <div class="form-group">
+                    <div class="question">
+                        <label for="high_cholesterol">Do you have high cholesterol?</label>
+                        <div class="options">
+                            <input type="radio" id="high_cholesterolYes" name="high_cholesterol" value="yes" required> Yes
+                            <input type="radio" id="high_cholesterolNo" name="high_cholesterol" value="no" required> No
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="question">
+                        <label for="fatty_liver">Do you have Fatty liver?</label>
+                        <div class="options">
+                            <input type="radio" id="fatty_liverYes" name="fatty_liver" value="yes" required> Yes
+                            <input type="radio" id="fatty_liverNo" name="fatty_liver" value="no" required> No
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="question">
+                        <label for="kidney_problem">Do you have kidney_problem problem?</label>
+                        <div class="options">
+                            <input type="radio" id="kidney_problemYes" name="kidney_problem" value="yes" required> Yes
+                            <input type="radio" id="kidney_problemNo" name="kidney_problem" value="no" required> No
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="question">
+                        <label for="heart_problem">Do you have Heart problem?</label>
+                        <div class="options">
+                            <input type="radio" id="heart_problemYes" name="heart_problem" value="yes" required> Yes
+                            <input type="radio" id="heart_problemNo" name="heart_problem" value="no" required> No
+                        </div>
+                    </div>
+                </div>
 
-        <label for="kidney_problem">Do you have kidney_problem problem?</label><br>
-        <input type="radio" id="kidney_problemYes" name="kidney_problem" value="yes" required> Yes
-        <input type="radio" id="kidney_problemNo" name="kidney_problem" value="no" required> No<br>
+                <div class="form-group">
+                    <div class="question">
+                        <label for="lactose_intolerance">Are you Lactose intolerant?</label>
+                        <div class="options">
+                            <input type="radio" id="lactose_intoleranceYes" name="lactose_intolerance" value="yes" required> Yes
+                            <input type="radio" id="lactose_intoleranceNo" name="lactose_intolerance" value="no" required> No
+                        </div>
+                    </div>
+                </div>
 
-        <label for="heart_problem">Do you have Heart problem?</label><br>
-        <input type="radio" id="heart_problemYes" name="heart_problem" value="yes" required> Yes
-        <input type="radio" id="heart_problemNo" name="heart_problem" value="no" required> No<br>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>
+        <p class="login-link">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
 
-        <label for="lactose_intolerance">Are you Lactose intolerant?</label><br>
-        <input type="radio" id="lactose_intoleranceYes" name="lactose_intolerance" value="yes" required> Yes
-        <input type="radio" id="lactose_intoleranceNo" name="lactose_intolerance" value="no" required> No<br>
-
-        <button type="submit">Register</button>
-    </form>
-    <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
 </body>
 </html>
+
