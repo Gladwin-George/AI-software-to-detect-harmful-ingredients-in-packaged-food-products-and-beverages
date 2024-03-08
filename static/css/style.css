@@ -118,6 +118,59 @@ nav {
 
 }
 
+.about-section {
+    display: flex;
+    position: relative;
+    padding-top: 100px; 
+    margin-top: 100px;
+}
+
+.about-section img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    margin-left: 100px;
+    position: relative;
+    z-index: 2; /* higher than the z-index of the shape */
+}
+
+.about-text {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    margin-left: 50px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    font-size: 16px;
+    line-height: 150%;
+    color: #000;
+    font-weight: bold;
+}
+
+.about-text h1 {
+    align-self: flex-start;
+    font-family: Arial, sans-serif;
+    font-size: 50px;
+    color: #00308a;
+    line-height: 90%;
+    font-weight: bolder;
+}
+
+.about-section::before {
+    content: "";
+    position: absolute;
+    top: 50%; 
+    left: 0; 
+    width: 400px; 
+    height: 400px; 
+    background: rgba(0, 204, 255, 0.466); 
+    border-radius: 50%; 
+    filter: blur(80px); 
+    z-index: 1; 
+    transform: translateY(-50%); 
+}
 /* Style the links inside the buttons */
 .home_info button a {
     color: white; 
