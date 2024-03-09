@@ -1,4 +1,5 @@
 $(document).ready(function(){
+   
     $("form").on("submit", function(event){
         event.preventDefault();
         
@@ -52,4 +53,18 @@ $(document).ready(function(){
             });
         } // End if
     });
+
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+    });
+
 });

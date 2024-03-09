@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="static\css\style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="static/js/main.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
     <nav>
@@ -18,6 +21,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#detect_ingredients">Detect Ingredients</a></li>
+            <li><a href="#doctors">Doctors</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="{{ url_for('login') }}">Login</a></li>
             <li><a href="{{ url_for('register') }}">Register</a></li>
@@ -86,6 +90,65 @@
                 
             </div>
         </div>
+    </section>
+
+    <section id="doctors">
+        <h2>Want to confirm through Nutritionist?</h2>
+        <div class="doctor_details">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+    
+                  <div class="swiper-slide">
+                    <div class="doctor_info">
+                        <h1>Dr. John Doe 1</h1>
+                        <p>Specialization: Nutritionist</p>
+                        <p>Experience: 10 years</p>
+                        <p>Location: New York, USA</p>
+                    </div>
+                  </div>
+    
+                  <div class="swiper-slide">
+                    <div class="doctor_info">
+                        <h1>Dr. John Doe 2</h1>
+                        <p>Specialization: Nutritionist</p>
+                        <p>Experience: 10 years</p>
+                        <p>Location: New York, USA</p>
+                    </div>
+                  </div>
+    
+                  <div class="swiper-slide">
+                    <div class="doctor_info">
+                        <h1>Dr. John Doe 3</h1>
+                        <p>Specialization: Nutritionist</p>
+                        <p>Experience: 10 years</p>
+                        <p>Location: New York, USA</p>
+                    </div>
+                  </div>
+    
+                  <div class="swiper-slide">
+                    <div class="doctor_info">
+                        <h1>Dr. John Doe 4</h1>
+                        <p>Specialization: Nutritionist</p>
+                        <p>Experience: 10 years</p>
+                        <p>Location: New York, USA</p>
+                    </div>
+                  </div>
+    
+                  <div class="swiper-slide">
+                    <div class="doctor_info">
+                        <h1>Dr. John Doe 5</h1>
+                        <p>Specialization: Nutritionist</p>
+                        <p>Experience: 10 years</p>
+                        <p>Location: New York, USA</p>
+                    </div>
+                  </div>
+    
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        
+        
     </section>
 
     <section id="contact">

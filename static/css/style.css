@@ -12,6 +12,7 @@ html, body {
     line-height: 1.6;
     color: #333;
     background-color: #ffffff;
+    
 }
 
 /* Style the nav */
@@ -23,7 +24,7 @@ nav {
     background-color: #ffffff;
     padding: 0px 16px;
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
 
 }
@@ -308,13 +309,13 @@ input[type="submit"]:hover {
 .container-2::before {
     content: "";
     position: absolute;
-    bottom: -150px; 
-    left: -850px; 
-    width: 450px; 
-    height: 450px; 
+    bottom: -20px; 
+    left: -750px; 
+    width: 250px; 
+    height: 250px; 
     border-radius: 50%;
     background: #00b7ff; 
-    filter: blur(150px); 
+    filter: blur(110px); 
     z-index: -1;
 }
 
@@ -333,6 +334,60 @@ input[type="submit"]:hover {
     overflow-y: auto;
 }
 
+#about{
+    height: 100vh;
+    background-color: #ffffff;
+}
+#doctors{
+    height: 100vh;
+    background: rgb(255, 255, 255);
+    padding-top: 100px; 
+    margin-top: 100px;
+}
+
+#doctors h2 {
+    align-self: flex-start;
+    font-family: Arial, sans-serif;
+    font-size: 40px;
+    color: #00308a;
+    line-height: 90%;
+    font-weight:bolder;
+    padding-left: 80px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.doctor_details{
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+.doctor_info {    
+    background-color: rgb(255, 255, 255);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: rgb(4, 205, 255) 4px solid;
+    border-radius: 15px;
+    box-shadow: 5px 8px 10px #6cdafc;
+    z-index: 1;
+}
+
 #contact{
     height: 300px;
     width: auto;
@@ -340,12 +395,9 @@ input[type="submit"]:hover {
     justify-content: space-around;
     align-items: center;
     padding: 20px;
-    background-color: rgb(0, 153, 255);
+    background: rgb(0,212,255);
+    background: linear-gradient(180deg, rgba(0,212,255,0) 0%, rgba(0,95,246,1) 0%, rgba(20,168,239,1) 100%);
     color: white;
-}
-#about{
-    height: 100vh;
-    background-color: #ffffff;
 }
 
 /* This will change the scrollbar for the whole page */
