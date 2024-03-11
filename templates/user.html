@@ -49,6 +49,8 @@
                     <li>{{ ingredient[0] }} - {{ ingredient[1] }}</li>
                 {% endfor %}
             </ul>
+        {% else %}
+            <h2>No harmful ingredients found for user</h2>
         {% endif %}
     </section>
 </body>

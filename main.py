@@ -131,9 +131,14 @@ def analyze_harmful_ingredients(file, user_profile):
     harmful_ingredients_for_user_names = [ingredient[0].lower() for ingredient in harmful_ingredients_for_user]
     user_based_harmful_ingredients = [ingredient for ingredient in harmful_ingredients if ingredient[0] in harmful_ingredients_for_user_names]
 
-    # Print the user-based harmful ingredients in the terminal
-    for ingredient in user_based_harmful_ingredients:
-        print(f'Found user-based harmful ingredient: {ingredient[0]} - {ingredient[1]}')
+    
+    # Check if any user-based harmful ingredients were found
+    if user_based_harmful_ingredients:
+        # Print the user-based harmful ingredients in the terminal
+        for ingredient in user_based_harmful_ingredients:
+            print(f'Found user-based harmful ingredient: {ingredient[0]} - {ingredient[1]}')
+    else:
+        print('No harmful ingredients found based on user data.')
 
     os.remove(filename)  # Remove the uploaded image
 
