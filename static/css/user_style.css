@@ -38,17 +38,16 @@ nav h1 {
     color: #fff;
 }
 
-#user_info, #analyze_ingredients, #harmful_ingredients {
-    background-color: #fff;
+#user_info,
+#analyze_ingredients {
     margin: 20px auto;
     padding: 20px;
     width: 80%;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 20px;
+#user_info{
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
 
 ul {
@@ -60,9 +59,6 @@ li {
     margin-bottom: 10px;
 }
 
-.user_detail {
-    color: #666;
-}
 
 form {
     display: flex;
@@ -79,6 +75,123 @@ input[type="submit"] {
     border: none;
     padding: 10px;
     cursor: pointer;
+}
+
+#analyze_ingredients{
+    margin-bottom: 50px;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.harmful_ingredients {
+    height: 370px;
+    width: 650px;
+    border-radius: 20px;
+    padding-left: 20px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border: rgb(4, 205, 255) 4px solid;
+    border-radius: 15px;
+    box-shadow: 5px 8px 10px #6cdafc;
+
+}
+
+.ingredients_list{
+    height: 270px;
+    width: 610px;
+    background-color: aqua;
+    padding-left: 20px;
+    padding-top: 10px;
+    border-radius: 20px;
+}
+
+.upload_image {
+    height: 350px;
+    width: 450px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border: rgb(4, 205, 255) 4px solid;
+    border-radius: 15px;
+    box-shadow: 5px 8px 10px #6cdafc;
+}
+
+.upload_image h2, p{
+    margin-left: 20px;
+}
+
+.upload_image input[type="file"] {
+    /* Style for the file input */
+    border: 1px solid #ddd;
+    padding: 10px;
+    color: #888;
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+.upload_image input[type="submit"] {
+    /* Style for the submit button */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload_image input[type="submit"]:hover {
+    /* Style for the submit button on hover */
+    background-color: #0099ff;
+}
+
+
+.upload-btn-wrapper {
+    position: relative;
+    width: 420px; 
+    height: 130px;
+    border: 4px dashed #00cbfd;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #00c3ff5d;
+}
+
+.upload-btn-wrapper input[type="file"] {
+    display: none;
+}
+
+.upload-btn-wrapper label {
+    color: #015752;
+    font-size: large;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
 }
 
 /* For Webkit browsers like Chrome and Safari */
