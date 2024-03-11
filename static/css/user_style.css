@@ -1,3 +1,97 @@
-.user_info{
-    background-color: blue;
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    margin: 0;
+    margin-top: 85px;
+    padding: 0;
 }
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #0099ff; 
+    color: #fff;
+}
+
+nav h1 {
+    margin-left: 50px;
+}
+
+.logout-btn {
+    margin-right: 50px;
+    background-color: #fff;
+    color: #000000;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.logout-btn:hover {
+    background-color: #003cff;
+    color: #fff;
+}
+
+#user_info, #analyze_ingredients, #harmful_ingredients {
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.user_detail {
+    color: #666;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* For Webkit browsers like Chrome and Safari */
+::-webkit-scrollbar {
+    width: 12px; 
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 153, 255);
+    border: 3px solid #ffffff; 
+}
+

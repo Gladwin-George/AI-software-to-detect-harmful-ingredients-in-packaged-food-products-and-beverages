@@ -5,17 +5,22 @@
     <link rel="stylesheet" href="static\css\user_style.css">
 </head>
 <body>
-    <h1>Welcome to the User Page</h1>
-    <p>This is a user-based page.</p>
+    <nav>
+        <h1>Harmful Ingredient Detection</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>    
+    </nav>
 
-    <div class="user_info">
-        <h2>User Information</h2>
+    <section id="user_info">
+        <h1>User Profile:</h1>
 
         <ul>
             <li>Name: {{ user[1] }}</li>
             <li>Email: {{ user[2] }}</li>
             <li>Age: {{ user[3] }}</li>
             <li>Gender: {{ user[4] }}</li>
+
+            <h2>Health status:</h2>
+
             <li>Obese: {{ user[6] }}</li>
             <li>Diabetes: {{ user[7] }}</li>
             <li>High BP: {{ user[8] }}</li>
@@ -25,24 +30,26 @@
             <li>Heart Problem: {{ user[12] }}</li>
             <li>Lactose Intolerance: {{ user[13] }}</li>
         </ul>
-        
-    </div>
 
-    <h2>Analyze Harmful Ingredients</h2>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
-    </form>
+    </section>
 
-    {% if harmful_ingredients %}
-        <h2>Harmful Ingredients found for user</h2>
-        <ul>
-            {% for ingredient in harmful_ingredients %}
-                <li>{{ ingredient[0] }} - {{ ingredient[1] }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <section id="analyze_ingredients">
+        <h2>Analyze Harmful Ingredients</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+    </section>
+
+    <section id="harmful_ingredients">
+        {% if harmful_ingredients %}
+            <h2>Harmful Ingredients found for user</h2>
+            <ul>
+                {% for ingredient in harmful_ingredients %}
+                    <li>{{ ingredient[0] }} - {{ ingredient[1] }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </section>
 </body>
 </html>
-
-
