@@ -178,3 +178,6 @@ extra databases/
 harmful_ingredients.db
 try_harmful_ingredients.db
 user2.db
+
+#extra python try files
+extra python try files/

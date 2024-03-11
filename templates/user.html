@@ -43,7 +43,7 @@
                     <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png">
                     <label for="file">Click to select ingredients image</label>
                 </div>
-                <input type="submit" value="Upload">
+                <input type="submit" name="upload" value="Upload">
             </form>
         
             {% if error %}
@@ -65,6 +65,11 @@
                     <h2>No harmful ingredients found for user</h2>
                 {% endif %}
             </div>
+
+            <form action="{{ url_for('user') }}" method="post">
+                <input type="hidden" name="send_to_doctor">
+                <input type="submit" name="email" value="Send to Doctor" class="my-button">
+            </form>
 
         </div>
 

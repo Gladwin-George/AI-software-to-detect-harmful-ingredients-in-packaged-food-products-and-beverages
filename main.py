@@ -1,9 +1,12 @@
+import os
 import cv2
 import easyocr
 import numpy as np
-import os
 import sqlite3
 import bcrypt
+import smtplib
+from email.mime.text import MIMEText
+from dotenv import load_dotenv
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
@@ -36,6 +39,10 @@ cursor.execute('''
 ''')
 conn.commit()
 conn.close()
+
+
+email = os.getenv('EMAIL')
+password = os.getenv('EMAIL_PASSWORD')
 
 #
 def analyze_general_harmful_ingredients(file):
@@ -248,7 +255,9 @@ def user():
 
         if user:
             harmful_ingredients = []
-            if request.method == 'POST':
+
+        if request.method == 'POST':
+            if 'upload' in request.form:
                 # Check if a file was uploaded
                 if 'file' not in request.files:
                     error = "No file uploaded"
@@ -262,13 +271,35 @@ def user():
                     return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients)
 
                 # If the file exists and is allowed, proceed with OCR and detection
-                harmful_ingredients = analyze_harmful_ingredients(file, user)
+                session['harmful_ingredients'] = analyze_harmful_ingredients(file, user)
+
+            if 'email' in request.form:
+                # If the form is submitted, send the email
+                doctor_email = email
+                msg = MIMEText(f"\nHarmful ingredients: {session.get('harmful_ingredients', [])}")
+                msg['Subject'] = 'User Health Info and Harmful Ingredients'
+                msg['From'] = email
+                msg['To'] = doctor_email
+                send_email(msg)
+                return redirect(url_for('user'))  # Redirect back to the user page
 
             # Pass the user data and the harmful ingredients to the template
-            return render_template('user.html', user=user, harmful_ingredients=harmful_ingredients)
+            return render_template('user.html', user=user, harmful_ingredients=session.get('harmful_ingredients', []))
 
-    # If the user is not logged in, redirect to the login page
-    return redirect(url_for('login'))
+        if not user:
+            # If the user is not logged in, redirect to the login page
+            return redirect(url_for('login'))
+
+        # Pass the user data and the harmful ingredients to the template
+        return render_template('user.html', user=user, harmful_ingredients=harmful_ingredients)
+
+def send_email(msg):
+    try:
+        with smtplib.SMTP_SSL('smtp.gmail.com') as server:
+            server.login(email, password)
+            server.send_message(msg)
+    except Exception as e:
+        print(f"Error: {e}")
 
 @app.route('/logout')
 def logout():
