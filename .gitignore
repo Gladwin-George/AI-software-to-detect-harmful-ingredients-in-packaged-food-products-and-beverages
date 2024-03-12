@@ -174,10 +174,11 @@ database try/
 #folder to store extra databases
 extra databases/ 
 
-#harmful ingredients databases to try codes
+#databases to try codes
 harmful_ingredients.db
 try_harmful_ingredients.db
 user2.db
+doctors.db
 
 #extra python try files
 extra python try files/

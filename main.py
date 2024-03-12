@@ -151,6 +151,14 @@ def analyze_harmful_ingredients(file, user_profile):
 
     return user_based_harmful_ingredients
 
+def get_doctors_emails():
+    conn = sqlite3.connect('doctors.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT email FROM doctors")
+    doctors_emails = [row[0] for row in cursor.fetchall()]
+    conn.close()
+    return doctors_emails
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     error = None
@@ -244,6 +252,9 @@ def login():
 
 @app.route('/user', methods=['GET', 'POST'])
 def user():
+    # Define doctors_emails at the start of the route
+    doctors_emails = get_doctors_emails()
+
     # Check if the user is logged in
     if 'user_id' in session:
         # Retrieve the user from the database
@@ -256,50 +267,56 @@ def user():
         if user:
             harmful_ingredients = []
 
-        if request.method == 'POST':
-            if 'upload' in request.form:
-                # Check if a file was uploaded
-                if 'file' not in request.files:
-                    error = "No file uploaded"
-                    return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients)
+            if request.method == 'POST':
+                if 'upload' in request.form:
+                    # Check if a file was uploaded
+                    if 'file' not in request.files:
+                        error = "No file uploaded"
+                        return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients, doctors_emails=doctors_emails)
 
-                file = request.files['file']
+                    file = request.files['file']
 
-                # If the user does not select a file, the browser submits an empty file without a filename
-                if file.filename == '':
-                    error = "No selected file"
-                    return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients)
+                    # If the user does not select a file, the browser submits an empty file without a filename
+                    if file.filename == '':
+                        error = "No selected file"
+                        return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients, doctors_emails=doctors_emails)
 
-                # If the file exists and is allowed, proceed with OCR and detection
-                session['harmful_ingredients'] = analyze_harmful_ingredients(file, user)
+                    # If the file exists and is allowed, proceed with OCR and detection
+                    session['harmful_ingredients'] = analyze_harmful_ingredients(file, user)
 
-            if 'email' in request.form:
-                # If the form is submitted, send the email
-                doctor_email = email
-                msg = MIMEText(f"\nHarmful ingredients: {session.get('harmful_ingredients', [])}")
-                msg['Subject'] = 'User Health Info and Harmful Ingredients'
-                msg['From'] = email
-                msg['To'] = doctor_email
-                send_email(msg)
-                return redirect(url_for('user'))  # Redirect back to the user page
+                if 'doctor_email' in request.form:
+                    # If the form is submitted, send the email
+                    doctor_email = request.form['doctor_email']
+                    msg = MIMEText(f"\nHarmful ingredients: {session.get('harmful_ingredients', [])}")
+                    msg['Subject'] = 'User Health Info and Harmful Ingredients'
+                    msg['From'] = email
+                    msg['To'] = doctor_email
+                    error = send_email(msg)  # Get the error message, if any
+                    if error:
+                        print(f"Failed to send email: {error}")  # Print the error message
+                    else:
+                        print("Email sent successfully")  # Print a success message
+                    return redirect(url_for('user'))  # Redirect back to the user page
 
-            # Pass the user data and the harmful ingredients to the template
-            return render_template('user.html', user=user, harmful_ingredients=session.get('harmful_ingredients', []))
+                # Pass the user data and the harmful ingredients to the template
+                return render_template('user.html', user=user, harmful_ingredients=session.get('harmful_ingredients', []), doctors_emails=doctors_emails)  # Pass the doctors' emails to the template
 
         if not user:
             # If the user is not logged in, redirect to the login page
             return redirect(url_for('login'))
 
-        # Pass the user data and the harmful ingredients to the template
-        return render_template('user.html', user=user, harmful_ingredients=harmful_ingredients)
+        return render_template('user.html', user=user, harmful_ingredients=harmful_ingredients, doctors_emails=doctors_emails)
 
 def send_email(msg):
     try:
         with smtplib.SMTP_SSL('smtp.gmail.com') as server:
             server.login(email, password)
             server.send_message(msg)
+        print("Email sent successfully")  # Print a success message
+        return None  # No error
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error: {e}")  # Print the error message
+        return str(e)  # Return the error message
 
 @app.route('/logout')
 def logout():

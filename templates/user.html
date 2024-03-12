@@ -67,9 +67,16 @@
             </div>
 
             <form action="{{ url_for('user') }}" method="post">
+                <select name="doctor_email" class="doctor-email-dropdown">
+                    {% for email in doctors_emails %}
+                        <option value="{{ email }}">{{ email }}</option>
+                    {% endfor %}
+                </select>
                 <input type="hidden" name="send_to_doctor">
                 <input type="submit" name="email" value="Send to Doctor" class="my-button">
             </form>
+
+
 
         </div>
 
