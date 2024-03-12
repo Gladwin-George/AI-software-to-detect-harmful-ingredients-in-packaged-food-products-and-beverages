@@ -12,6 +12,7 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
+    height: 75px;
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
@@ -19,8 +20,15 @@ nav {
     color: #fff;
 }
 
-nav h1 {
+.home-link {
+    text-decoration: none;  
+    color: rgb(255, 255, 255); 
     margin-left: 50px;
+}
+
+.home-link h1 {
+    font-size: 2em;  
+    margin: 0;  
 }
 
 .logout-btn {
@@ -125,7 +133,7 @@ input[type="submit"] {
 .header-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;  /* This will vertically center the h2 and the form */
+    align-items: center;  
 }
 
 .ingredients_list{
