@@ -7,7 +7,7 @@
 <body>
     <nav>
         <h1>Harmful Ingredient Detection</h1>
-        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>    
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>   
     </nav>
 
     <section id="user_info">
@@ -52,7 +52,15 @@
         </div>
 
         <div class="harmful_ingredients">
-            <h2>Harmful Ingredients found for user</h2>
+            <div class="header-container">
+                <h2>Harmful Ingredients found for user</h2>
+                <form method="POST" class="refresh-btn-form">
+                    <input type="hidden" name="refresh_data" value="true">
+                    <button type="submit" class="refresh-btn">
+                        <img src="static/images/refresh0.png" alt="Refresh Data">
+                    </button>
+                </form>
+            </div>
 
             <div class="ingredients_list">
                 {% if harmful_ingredients %}

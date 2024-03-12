@@ -38,6 +38,26 @@ nav h1 {
     color: #fff;
 }
 
+.refresh-btn-form {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.refresh-btn {
+    background: none;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.refresh-btn img {
+    width: 40px;
+    height: 40px;
+}
+
 #user_info,
 #analyze_ingredients {
     margin: 20px auto;
@@ -100,6 +120,12 @@ input[type="submit"] {
     border-radius: 15px;
     box-shadow: 5px 8px 10px #6cdafc;
 
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  /* This will vertically center the h2 and the form */
 }
 
 .ingredients_list{

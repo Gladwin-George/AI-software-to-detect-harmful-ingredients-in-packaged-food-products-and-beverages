@@ -268,6 +268,11 @@ def user():
             harmful_ingredients = []
 
             if request.method == 'POST':
+                if 'refresh_data' in request.form:
+                    # If the 'Refresh Data' button was clicked, clear the session data
+                    session.pop('harmful_ingredients', None)
+                    return redirect(url_for('user'))
+        
                 if 'upload' in request.form:
                     # Check if a file was uploaded
                     if 'file' not in request.files:
