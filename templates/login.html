@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="static\css\login_style.css">
 </head>
 <body>
+    <nav>
+        <a href="{{ url_for('index') }}" class="home-link">
+            <h1>Harmful Ingredient Detection</h1>
+        </a>
+    </nav>
+
     <div class="login-container">
         <h2 class="login-title">LOGIN</h2>
         {% if error %}
