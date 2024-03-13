@@ -152,13 +152,13 @@ def analyze_harmful_ingredients(file, user_profile):
 
     return user_based_harmful_ingredients
 
-def get_doctors_emails():
+def get_doctors_details():
     conn = sqlite3.connect('doctors.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT email FROM doctors")
-    doctors_emails = [row[0] for row in cursor.fetchall()]
+    cursor.execute("SELECT name, email, qualifications, experience FROM doctors")
+    doctors_details = [{'name': row[0], 'email': row[1], 'qualifications': row[2], 'experience': row[3]} for row in cursor.fetchall()]
     conn.close()
-    return doctors_emails
+    return doctors_details
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -253,8 +253,8 @@ def login():
 
 @app.route('/user', methods=['GET', 'POST'])
 def user():
-    # Define doctors_emails at the start of the route
-    doctors_emails = get_doctors_emails()
+    # Define doctors_details at the start of the route
+    doctors_details = get_doctors_details()
 
     # Check if the user is logged in
     if 'user_id' in session:
@@ -278,14 +278,14 @@ def user():
                     # Check if a file was uploaded
                     if 'file' not in request.files:
                         error = "No file uploaded"
-                        return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients, doctors_emails=doctors_emails)
+                        return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients, doctors_details=doctors_details)
 
                     file = request.files['file']
 
                     # If the user does not select a file, the browser submits an empty file without a filename
                     if file.filename == '':
                         error = "No selected file"
-                        return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients, doctors_emails=doctors_emails)
+                        return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients, doctors_details=doctors_details)
 
                     # If the file exists and is allowed, proceed with OCR and detection
                     session['harmful_ingredients'] = analyze_harmful_ingredients(file, user)
@@ -305,13 +305,13 @@ def user():
                     return redirect(url_for('user'))  # Redirect back to the user page
 
                 # Pass the user data and the harmful ingredients to the template
-                return render_template('user.html', user=user, harmful_ingredients=session.get('harmful_ingredients', []), doctors_emails=doctors_emails)  # Pass the doctors' emails to the template
+                return render_template('user.html', user=user, harmful_ingredients=session.get('harmful_ingredients', []), doctors_details=doctors_details)  # Pass the doctors' details to the template
 
         if not user:
             # If the user is not logged in, redirect to the login page
             return redirect(url_for('login'))
 
-        return render_template('user.html', user=user, harmful_ingredients=harmful_ingredients, doctors_emails=doctors_emails)
+        return render_template('user.html', user=user, harmful_ingredients=harmful_ingredients, doctors_details=doctors_details)
 
 def send_email(msg):
     try:

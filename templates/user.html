@@ -82,8 +82,10 @@
 
             <form action="{{ url_for('user') }}" method="post">
                 <select name="doctor_email" class="doctor-email-dropdown">
-                    {% for email in doctors_emails %}
-                        <option value="{{ email }}">{{ email }}</option>
+                    {% for doctor in doctors_details %}
+                        <option value="{{ doctor.email }}">
+                            {{ doctor.name }}, {{ doctor.qualifications }}, {{ doctor.experience }} years experience, {{ doctor.email }}
+                        </option>
                     {% endfor %}
                 </select>
                 <input type="hidden" name="send_to_doctor">
