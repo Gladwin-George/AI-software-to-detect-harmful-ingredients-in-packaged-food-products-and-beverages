@@ -145,12 +145,27 @@ input[type="submit"] {
 
 .ingredients_list{
     height: 180px;
-    width: 630px;
+    width: 610px;
     background-color: rgb(180, 255, 251);
     padding-left: 20px;
+    padding-right: 20px; 
     padding-top: 10px;
     border-radius: 20px;
     margin-bottom: 15px;
+}
+
+.ingredients_list ul {
+    list-style-type: none; /* Removes the default list bullets */
+    padding: 0; /* Removes the default list padding */
+}
+
+.ingredients_list ul li {
+    padding: 10px 10px 10px 0; /* Adds 10px padding to the top, right, and bottom, and 0 padding to the left */
+    border-bottom: 1px solid #000000; /* Adds a bottom border to each list item */
+}
+
+.ingredients_list ul li:last-child {
+    border-bottom: none; /* Removes the bottom border from the last list item */
 }
 
 .upload_image {
