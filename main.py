@@ -146,6 +146,7 @@ def analyze_harmful_ingredients(file, user_profile):
             print(f'Found user-based harmful ingredient: {ingredient[0]} - {ingredient[1]}')
     else:
         print('No harmful ingredients found based on user data.')
+        return ['No harmful ingredients found for user']
 
     os.remove(filename)  # Remove the uploaded image
 

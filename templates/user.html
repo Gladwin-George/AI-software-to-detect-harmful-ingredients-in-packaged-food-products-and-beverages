@@ -66,13 +66,17 @@
 
             <div class="ingredients_list">
                 {% if harmful_ingredients %}
-                    <ul>
-                        {% for ingredient in harmful_ingredients %}
-                            <li>{{ ingredient[0] }} - {{ ingredient[1] }}</li>
-                        {% endfor %}
-                    </ul>
+                    {% if harmful_ingredients[0] is string %}
+                        {{ harmful_ingredients[0] }}
+                    {% else %}
+                        <ul>
+                            {% for ingredient in harmful_ingredients %}
+                                <li>{{ ingredient[0] }} - {{ ingredient[1] }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 {% else %}
-                    <h2>No harmful ingredients found for user</h2>
+                    <h2>Upload image to find harmful ingredients in the food product for user</h2>
                 {% endif %}
             </div>
 
