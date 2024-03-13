@@ -155,17 +155,17 @@ input[type="submit"] {
 }
 
 .ingredients_list ul {
-    list-style-type: none; /* Removes the default list bullets */
-    padding: 0; /* Removes the default list padding */
+    list-style-type: none;
+    padding: 0; 
 }
 
 .ingredients_list ul li {
-    padding: 10px 10px 10px 0; /* Adds 10px padding to the top, right, and bottom, and 0 padding to the left */
-    border-bottom: 1px solid #000000; /* Adds a bottom border to each list item */
+    padding: 10px 10px 10px 0; 
+    border-bottom: 1px solid #000000; 
 }
 
 .ingredients_list ul li:last-child {
-    border-bottom: none; /* Removes the bottom border from the last list item */
+    border-bottom: none; 
 }
 
 .upload_image {
