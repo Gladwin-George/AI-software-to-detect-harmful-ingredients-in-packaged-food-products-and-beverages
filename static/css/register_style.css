@@ -2,7 +2,6 @@ body {
     font-family: Arial, sans-serif;
     background: rgb(0,212,255);
     background: linear-gradient(180deg, rgba(0,212,255,0) 0%, rgba(0,95,246,1) 0%, rgba(20,168,239,1) 100%);
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +21,6 @@ body {
 .register-container {
     background-color: white;
     padding: 20px;
-    border-radius: 15px;
     box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.1);
     width: 500px;
     height: 540px; 

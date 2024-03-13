@@ -341,11 +341,10 @@ input[type="submit"]:hover {
 #doctors{
     height: 100vh;
     background: rgb(255, 255, 255);
-    padding-top: 100px; 
-    margin-top: 100px;
+    padding-top:80px; 
 }
 
-#doctors h2 {
+.doctors_heading h2 {
     align-self: flex-start;
     font-family: Arial, sans-serif;
     font-size: 40px;
@@ -355,6 +354,15 @@ input[type="submit"]:hover {
     padding-left: 80px;
     margin-bottom: 20px;
     margin-top: 40px;
+}
+
+.doctors_heading p {
+    font-size: 25px;
+    font-weight: bold;
+    color: #00308a;
+    margin-top: 50px;
+    padding-left: 160px;
+    line-height: 1.5; 
 }
 
 .doctor_details{
@@ -379,6 +387,7 @@ input[type="submit"]:hover {
 }
 
 .doctor_info {    
+    height: 240px;
     background-color: rgb(255, 255, 255);
     padding-top: 20px;
     padding-bottom: 20px;
@@ -388,6 +397,36 @@ input[type="submit"]:hover {
     z-index: 1;
 }
 
+.doctor_profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.profile_image {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    margin-left: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 3px solid #7edcfe; /* Adds a border around the image */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Adds a subtle shadow for a 3D effect */
+    transition: all 0.3s ease; /* Adds a transition effect when hovering over the image */
+}
+
+.profile_image:hover {
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2); /* Increases the shadow size on hover */
+    transform: scale(1.05); /* Slightly increases the image size on hover */
+}
+
+.doctor_general_details{
+    margin: 20px;
+    text-align: left;
+
+}
 
 #footer {
     height: 250px;
