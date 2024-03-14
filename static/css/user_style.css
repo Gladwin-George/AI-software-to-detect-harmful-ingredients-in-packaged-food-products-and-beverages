@@ -329,6 +329,11 @@ input[type="submit"]:hover {
     color: #ffffff;  
 }
 
+.doctor_dataview{
+    margin: 50PX;
+    background-color: #007BFF;
+}
+
 /* For Webkit browsers like Chrome and Safari */
 ::-webkit-scrollbar {
     width: 12px; 

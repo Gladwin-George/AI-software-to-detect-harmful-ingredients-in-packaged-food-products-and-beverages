@@ -37,6 +37,17 @@ cursor.execute('''
         lactose_intolerance TEXT NOT NULL
     )
 ''')
+
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS harmful_ingredients_data (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        ingredient_name TEXT NOT NULL,
+        description TEXT NOT NULL,
+        FOREIGN KEY(user_id) REFERENCES users(id)
+    )
+''')
+
 conn.commit()
 conn.close()
 
@@ -150,13 +161,22 @@ def analyze_harmful_ingredients(file, user_profile):
 
     os.remove(filename)  # Remove the uploaded image
 
+    # Step 5: Store harmful ingredients data in the database
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    for ingredient in user_based_harmful_ingredients:
+        cursor.execute("INSERT INTO harmful_ingredients_data (user_id, ingredient_name, description) VALUES (?, ?, ?)",
+                       (user_profile[0], ingredient[0], ingredient[1]))
+    conn.commit()
+    conn.close()
+
     return user_based_harmful_ingredients
 
-def get_doctors_details():
+def get_doctors_details(order_by='experience', direction='DESC'):
     conn = sqlite3.connect('doctors.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT name, email, qualifications, experience FROM doctors")
-    doctors_details = [{'name': row[0], 'email': row[1], 'qualifications': row[2], 'experience': row[3]} for row in cursor.fetchall()]
+    cursor.execute(f"SELECT name, email, qualifications, experience, (length(qualifications) - length(replace(qualifications, ',', ''))) as degrees FROM doctors ORDER BY {order_by} {direction}")
+    doctors_details = [{'name': row[0], 'email': row[1], 'qualifications': row[2], 'experience': row[3], 'degrees': row[4]} for row in cursor.fetchall()]
     conn.close()
     return doctors_details
 
@@ -254,7 +274,9 @@ def login():
 @app.route('/user', methods=['GET', 'POST'])
 def user():
     # Define doctors_details at the start of the route
-    doctors_details = get_doctors_details()
+    order_by = request.args.get('order_by', 'experience')
+    direction = request.args.get('direction', 'DESC')
+    doctors_details = get_doctors_details(order_by, direction)
 
     # Check if the user is logged in
     if 'user_id' in session:
@@ -267,11 +289,25 @@ def user():
 
         if user:
             harmful_ingredients = []
+            # Retrieve the harmful ingredients data from the database
+            conn = sqlite3.connect('users.db')
+            cursor = conn.cursor()
+            cursor.execute("SELECT ingredient_name, description FROM harmful_ingredients_data WHERE user_id = ?", (session['user_id'],))
+            harmful_ingredients = cursor.fetchall()
+            conn.close()
 
             if request.method == 'POST':
                 if 'refresh_data' in request.form:
                     # If the 'Refresh Data' button was clicked, clear the session data
                     session.pop('harmful_ingredients', None)
+
+                    # If the 'Refresh Data' button was clicked, clear the harmful ingredients data from the database
+                    conn = sqlite3.connect('users.db')
+                    cursor = conn.cursor()
+                    cursor.execute("DELETE FROM harmful_ingredients_data WHERE user_id = ?", (session['user_id'],))
+                    conn.commit()
+                    conn.close()
+
                     return redirect(url_for('user'))
         
                 if 'upload' in request.form:
