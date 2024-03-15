@@ -358,7 +358,7 @@ input[type="submit"]:hover {
 
 .doctor-email-dropdown option {
     background-color: #5fc4ff;  
-    color: #ffffff;  
+    color: #000000;  
 }
 
 .doctor_dataview{
@@ -425,7 +425,7 @@ input[type="submit"]:hover {
 
 .doctor_dataview a {
     display: inline-block;
-    color: #fff;
+    color: #000000;
     background-color: #0099ff;
     padding: 10px 20px;
     margin: 5px;

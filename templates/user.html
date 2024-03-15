@@ -108,6 +108,7 @@
     
                 <form action="{{ url_for('user') }}" method="post">
                     <select name="doctor_email" class="doctor-email-dropdown">
+                        <option value="family_doctor">Family Doctor</option>
                         {% for doctor in doctors_details %}
                             <option value="{{ doctor.email }}">
                                 {{ doctor.name }}, {{ doctor.qualifications }}, {{ doctor.experience }} years experience, {{ doctor.email }}

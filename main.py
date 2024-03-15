@@ -34,7 +34,9 @@ cursor.execute('''
         fatty_liver TEXT NOT NULL,
         kidney_problem TEXT NOT NULL,
         heart_problem TEXT NOT NULL,
-        lactose_intolerance TEXT NOT NULL
+        lactose_intolerance TEXT NOT NULL,
+        family_doctor_name TEXT,
+        family_doctor_email TEXT
     )
 ''')
 
@@ -223,6 +225,9 @@ def register():
         kidney_problem = request.form['kidney_problem']
         heart_problem = request.form['heart_problem']
         lactose_intolerance = request.form['lactose_intolerance']
+        #family doctor info
+        family_doctor_name = request.form['family_doctor_name']
+        family_doctor_email = request.form['family_doctor_email']
 
         # Check if the email is already registered
         conn = sqlite3.connect('users.db')
@@ -239,8 +244,8 @@ def register():
             # Insert the user into the database with additional information
             conn = sqlite3.connect('users.db')
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO users (name, email, age, gender, password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                           (name, email, age, gender, hashed_password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance))
+            cursor.execute("INSERT INTO users (name, email, age, gender, password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance, family_doctor_name, family_doctor_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                           (name, email, age, gender, hashed_password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance, family_doctor_name, family_doctor_email))
             conn.commit()
             conn.close()
 
@@ -330,9 +335,12 @@ def user():
                 if 'doctor_email' in request.form:
                     # If the form is submitted, send the email
                     doctor_email = request.form['doctor_email']
+                    if doctor_email == 'family_doctor':
+                        doctor_email = user[15]  # Assuming family_doctor_email is the 14th column in the users table
+                    
                     user_details = f"Name: {user[1]}\nEmail: {user[2]}\nAge: {user[3]}\nGender: {user[4]}\n"
                     health_details = f"Obese: {user[6]}\nDiabetes: {user[7]}\nHigh BP: {user[8]}\nHigh Cholesterol: {user[9]}\nFatty Liver: {user[10]}\nKidney Problem: {user[11]}\nHeart Problem: {user[12]}\nLactose Intolerance: {user[13]}\n"
-                    harmful_ingredients = f"\nHarmful ingredients: {session.get('harmful_ingredients', [])}"
+                    harmful_ingredients = f"\nHarmful ingredients: \n{session.get('harmful_ingredients', [])}"
                     msg = MIMEText(user_details + health_details + f"\nHarmful ingredients: {session.get('harmful_ingredients', [])}")
                     msg['Subject'] = 'User Health Info and Harmful Ingredients'
                     msg['From'] = email
