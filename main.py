@@ -12,6 +12,11 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 
+from PIL import Image
+from  pytesseract import pytesseract
+
+pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
 
 app = Flask(__name__)
 app.secret_key = 'your secret key'  # Set the secret key for your Flask application to use sessions
@@ -63,11 +68,17 @@ def analyze_general_harmful_ingredients(file):
     filename = 'uploaded_image.jpg'
     file.save(filename)
 
-    # Step 1: Extract text from the image
+    # Step 1: Extract text from the image using ocr
+    # img = cv2.imread(filename)
+    # reader = easyocr.Reader(['en'])
+    # text_results = reader.readtext(filename)
+    # extracted_text = ' '.join([result[1] for result in text_results])
+    # print(f'Extracted text: {extracted_text}')
+
+    # Step 1: Extract text from the image using tesseract
     img = cv2.imread(filename)
-    reader = easyocr.Reader(['en'])
-    text_results = reader.readtext(filename)
-    extracted_text = ' '.join([result[1] for result in text_results])
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    extracted_text = pytesseract.image_to_string(gray)
     print(f'Extracted text: {extracted_text}')
 
     # Step 2: Load harmful ingredients from SQLite database into a dictionary
@@ -120,11 +131,17 @@ def analyze_harmful_ingredients(file, user_profile):
     filename = 'uploaded_image.jpg'
     file.save(filename)
 
-    # Step 1: Extract text from the image
+    # Step 1: Extract text from the image using ocr
+    # img = cv2.imread(filename)
+    # reader = easyocr.Reader(['en'])
+    # text_results = reader.readtext(filename)
+    # extracted_text = ' '.join([result[1] for result in text_results])
+    # print(f'Extracted text: {extracted_text}')
+
+    # Step 1: Extract text from the image using tesseract
     img = cv2.imread(filename)
-    reader = easyocr.Reader(['en'])
-    text_results = reader.readtext(filename)
-    extracted_text = ' '.join([result[1] for result in text_results])
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    extracted_text = pytesseract.image_to_string(gray)
     print(f'Extracted text: {extracted_text}')
 
     # Step 2: Load harmful ingredients from SQLite database into a dictionary
