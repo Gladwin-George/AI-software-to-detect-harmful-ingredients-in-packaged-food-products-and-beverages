@@ -18,6 +18,8 @@ nav {
     align-items: center; 
     background-color: #0099ff; 
     color: #fff;
+    z-index: 1;
+
 }
 
 .home-link {
@@ -279,7 +281,7 @@ input[type="submit"] {
 #placeholder-text {
     color: #000000;  
     padding-bottom: 100px;
-    margin-top: auto;  /* Push the placeholder text to the bottom */
+    margin-top: auto;  
 }
 
 
@@ -396,7 +398,7 @@ input[type="submit"]:hover {
     position: sticky;
     top: 0;
     background: #00c3ff; 
-    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); 
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);        
     
 }
 
@@ -414,6 +416,17 @@ input[type="submit"]:hover {
     text-decoration: none;
     
     transition: background-color 0.3s ease;
+}
+
+.scrollable-tbody {
+    display: block;
+    height: 300px; /* Adjust as needed */
+    overflow-y: auto;
+}
+
+.scrollable-tbody tbody {
+    display: table;
+    width: 100%;
 }
 
 .doctor_dataview a:hover {
