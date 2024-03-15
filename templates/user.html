@@ -67,7 +67,12 @@
                 </div>
     
             </div>
-    
+        </div>
+    </section>
+
+    <section id="results_response_section">
+        <div class="results_response">
+
             <div class="harmful_ingredients">
                 <div class="header-container">
                     <h2>Harmful Ingredients found for user</h2>
@@ -106,40 +111,46 @@
                     <input type="hidden" name="send_to_doctor">
                     <input type="submit" name="email" value="Send to Doctor" class="my-button">
                 </form>
-    
-    
-    
+
             </div>
 
             <div class="doctor_dataview">
                 <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Qualifications</th>
-                        <th>Experience</th>
-                    </tr>
-                    {% for doctor in doctors_details %}
-                    <tr>
-                        <td>{{ doctor.name }}</td>
-                        <td>{{ doctor.email }}</td>
-                        <td>{{ doctor.qualifications }}</td>
-                        <td>{{ doctor.experience }}</td>
-                    </tr>
-                    {% endfor %}
+                    <caption>Doctor's Details</caption>
+
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Qualifications</th>
+                            <th>Experience</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr>
+                            <td colspan="4"> <!-- Adjust the number to match the number of columns in your table -->
+                                <a href="{{ url_for('user', order_by='experience', direction='ASC') }}">Sort experience (ascending)</a>
+                                <a href="{{ url_for('user', order_by='experience', direction='DESC') }}">Sort experience (descending)</a>
+                                <a href="{{ url_for('user', order_by='degrees', direction='ASC') }}">Sort number of degrees (ascending)</a>
+                                <a href="{{ url_for('user', order_by='degrees', direction='DESC') }}">Sort number of degrees (descending)</a>
+                            </td>
+                        </tr>
+                        {% for doctor in doctors_details %}
+                        <tr>
+                            <td>{{ doctor.name }}</td>
+                            <td>{{ doctor.email }}</td>
+                            <td>{{ doctor.qualifications }}</td>
+                            <td>{{ doctor.experience }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
 
-                <a href="{{ url_for('user', order_by='experience', direction='ASC') }}">Sort by experience (ascending)</a>
-                <a href="{{ url_for('user', order_by='experience', direction='DESC') }}">Sort by experience (descending)</a>
-                <a href="{{ url_for('user', order_by='degrees', direction='ASC') }}">Sort by number of degrees (ascending)</a>
-                <a href="{{ url_for('user', order_by='degrees', direction='DESC') }}">Sort by number of degrees (descending)</a>
-                    
+                   
             </div>
 
-            
         </div>
-
-
     </section>
 
 </body>

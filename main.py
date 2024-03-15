@@ -44,6 +44,7 @@ cursor.execute('''
         user_id INTEGER,
         ingredient_name TEXT NOT NULL,
         description TEXT NOT NULL,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(user_id) REFERENCES users(id)
     )
 ''')
@@ -165,7 +166,7 @@ def analyze_harmful_ingredients(file, user_profile):
     conn = sqlite3.connect('users.db')
     cursor = conn.cursor()
     for ingredient in user_based_harmful_ingredients:
-        cursor.execute("INSERT INTO harmful_ingredients_data (user_id, ingredient_name, description) VALUES (?, ?, ?)",
+        cursor.execute("INSERT INTO harmful_ingredients_data (user_id, ingredient_name, description, timestamp) VALUES (?, ?, ?, datetime('now'))",
                        (user_profile[0], ingredient[0], ingredient[1]))
     conn.commit()
     conn.close()
@@ -289,10 +290,10 @@ def user():
 
         if user:
             harmful_ingredients = []
-            # Retrieve the harmful ingredients data from the database
+            # Retrieve the most recent harmful ingredients data from the database
             conn = sqlite3.connect('users.db')
             cursor = conn.cursor()
-            cursor.execute("SELECT ingredient_name, description FROM harmful_ingredients_data WHERE user_id = ?", (session['user_id'],))
+            cursor.execute("SELECT ingredient_name, description FROM harmful_ingredients_data WHERE user_id = ? ORDER BY timestamp DESC", (session['user_id'],))
             harmful_ingredients = cursor.fetchall()
             conn.close()
 
