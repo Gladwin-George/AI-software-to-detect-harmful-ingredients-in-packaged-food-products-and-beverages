@@ -187,6 +187,49 @@ nav {
     overflow: hidden; 
 }
 
+
+.image_preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;  
+    padding: 10px;     
+    height: 400px;
+    width: 550px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border: rgb(4, 205, 255) 4px solid;
+    border-radius: 15px;
+    box-shadow: 5px 8px 10px #6cdafc;
+}
+
+.image_preview h2 {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.image_preview img {
+    box-sizing: border-box;  
+    max-width: 90%;  
+    max-height: 90%;  
+    display: block;  
+    margin: auto;  
+    padding: 10px;  
+    padding-bottom: 25px;
+    margin-top: auto;  /* Push the image to the bottom */
+}
+
+#image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
 .container{
     display: flex;
     margin: 50px;
@@ -199,7 +242,7 @@ nav {
     width: 500px;
     border: 1px solid #ccc;
     padding: 10px;
-    margin-right: 50px;
+    margin-right: 0px;
     color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
     border: rgb(4, 205, 255) 4px solid;
