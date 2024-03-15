@@ -361,6 +361,48 @@ def send_email(msg):
         print(f"Error: {e}")  # Print the error message
         return str(e)  # Return the error message
 
+@app.route('/edit_profile', methods=['GET', 'POST'])
+def edit_profile():
+    # Check if the user is logged in
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    # Retrieve the user from the database
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE id = ?", (session['user_id'],))
+    user = cursor.fetchone()
+    conn.close()
+
+    if request.method == 'POST':
+        # Retrieve the updated details from the form data
+        name = request.form['name']
+        age = request.form['age']
+        gender = request.form['gender']
+        obese = request.form['obese']
+        diabetes = request.form['diabetes']
+        high_bp = request.form['high_bp']
+        high_cholesterol = request.form['high_cholesterol']
+        fatty_liver = request.form['fatty_liver']
+        kidney_problem = request.form['kidney_problem']
+        heart_problem = request.form['heart_problem']
+        lactose_intolerance = request.form['lactose_intolerance']
+
+        # Update the user's details in the database
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+        cursor.execute('''
+            UPDATE users
+            SET name = ?, age = ?, gender = ?, obese = ?, diabetes = ?, high_bp = ?, high_cholesterol = ?, fatty_liver = ?, kidney_problem = ?, heart_problem = ?, lactose_intolerance = ?
+            WHERE id = ?
+        ''', (name, age, gender, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance, session['user_id']))
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('user'))
+
+    return render_template('edit_profile.html', user=user)
+
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)

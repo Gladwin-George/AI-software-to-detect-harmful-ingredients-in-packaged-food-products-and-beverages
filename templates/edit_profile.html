@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="static\css\edit_style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Edit Profile</h1>
+        </div>
+        <div class="form-container">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="{{ user.name }}" >
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="text" id="age" name="age" value="{{ user.age }}">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender">
+                        <option value="male" {{ 'selected' if user.gender == 'male' }}>Male</option>
+                        <option value="female" {{ 'selected' if user.gender == 'female' }}>Female</option>
+                        <option value="other" {{ 'selected' if user.gender == 'other' }}>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="obese">Obese:</label>
+                    <div>
+                        <label><input type="radio" id="obeseYes" name="obese" value="yes" required {{ 'checked' if user.obese == 'yes' }}> Yes</label>
+                        <label><input type="radio" id="obeseNo" name="obese" value="no" required {{ 'checked' if user.obese == 'no' }}> No</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="diabetes">Diabetes:</label>
+                    <div>
+                        <label><input type="radio" id="diabetesYes" name="diabetes" value="yes" required {{ 'checked' if user.diabetes == 'yes' }}> Yes</label>
+                        <label><input type="radio" id="diabetesNo" name="diabetes" value="no" required {{ 'checked' if user.diabetes == 'no' }}> No</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="high_bp">High Blood Pressure:</label>
+                    <div>
+                        <label><input type="radio" id="high_bpYes" name="high_bp" value="yes" required {{ 'checked' if user.high_bp == 'yes' }}> Yes</label>
+                        <label><input type="radio" id="high_bpNo" name="high_bp" value="no" required {{ 'checked' if user.high_bp == 'no' }}> No</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="high_cholesterol">High Cholesterol:</label>
+                    <div>
+                        <label><input type="radio" id="high_cholesterolYes" name="high_cholesterol" value="yes" required {{ 'checked' if user.high_cholesterol == 'yes' }}> Yes</label>
+                        <label><input type="radio" id="high_cholesterolNo" name="high_cholesterol" value="no" required {{ 'checked' if user.high_cholesterol == 'no' }}> No</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fatty_liver">Fatty Liver:</label>
+                    <div>
+                        <label><input type="radio" id="fatty_liverYes" name="fatty_liver" value="yes" required {{ 'checked' if user.fatty_liver == 'yes' }}> Yes</label>
+                        <label><input type="radio" id="fatty_liverNo" name="fatty_liver" value="no" required {{ 'checked' if user.fatty_liver == 'no' }}> No</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="kidney_problem">Kidney Problem:</label>
+                    <div>
+                        <label><input type="radio" id="kidney_problemYes" name="kidney_problem" value="yes" required {{ 'checked' if user.kidney_problem == 'yes' }}> Yes</label>
+                        <label><input type="radio" id="kidney_problemNo" name="kidney_problem" value="no" required {{ 'checked' if user.kidney_problem == 'no' }}> No</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="heart_problem">Heart Problem:</label>
+                    <div>
+                        <label><input type="radio" id="heart_problemYes" name="heart_problem" value="yes" required {{ 'checked' if user.heart_problem == 'yes' }}> Yes</label>
+                        <label><input type="radio" id="heart_problemNo" name="heart_problem" value="no" required {{ 'checked' if user.heart_problem == 'no' }}> No</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lactose_intolerance">Lactose Intolerance:</label>
+                    <div>
+                        <label><input type="radio" id="lactose_intoleranceYes" name="lactose_intolerance" value="yes" required {{ 'checked' if user.lactose_intolerance == 'yes' }}> Yes</label>
+                        <label><input type="radio" id="lactose_intoleranceNo" name="lactose_intolerance" value="no" required {{ 'checked' if user.lactose_intolerance == 'no' }}> No</label>
+                    </div>
+                </div>
+                <input type="submit" value="Update">
+            </form>
+        </div>
+    </div>
+
+
+    
+</body>
+</html>
