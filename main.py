@@ -330,7 +330,10 @@ def user():
                 if 'doctor_email' in request.form:
                     # If the form is submitted, send the email
                     doctor_email = request.form['doctor_email']
-                    msg = MIMEText(f"\nHarmful ingredients: {session.get('harmful_ingredients', [])}")
+                    user_details = f"Name: {user[1]}\nEmail: {user[2]}\nAge: {user[3]}\nGender: {user[4]}\n"
+                    health_details = f"Obese: {user[6]}\nDiabetes: {user[7]}\nHigh BP: {user[8]}\nHigh Cholesterol: {user[9]}\nFatty Liver: {user[10]}\nKidney Problem: {user[11]}\nHeart Problem: {user[12]}\nLactose Intolerance: {user[13]}\n"
+                    harmful_ingredients = f"\nHarmful ingredients: {session.get('harmful_ingredients', [])}"
+                    msg = MIMEText(user_details + health_details + f"\nHarmful ingredients: {session.get('harmful_ingredients', [])}")
                     msg['Subject'] = 'User Health Info and Harmful Ingredients'
                     msg['From'] = email
                     msg['To'] = doctor_email
