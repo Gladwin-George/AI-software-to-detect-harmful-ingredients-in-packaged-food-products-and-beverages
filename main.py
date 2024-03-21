@@ -114,15 +114,17 @@ def get_harmful_ingredients(user_profile):
             (age_min <= ? OR age_min IS NULL) AND
             (age_max >= ? OR age_max IS NULL) AND
             (gender = ? OR gender = 'both') AND
-            ((obese = 'yes' AND ? = 'yes') OR 
-            (diabetes = 'yes' AND ? = 'yes') OR 
-            (high_bp = 'yes' AND ? = 'yes') OR 
-            (high_cholesterol = 'yes' AND ? = 'yes') OR 
-            (fatty_liver = 'yes' AND ? = 'yes') OR 
-            (kidney_problem = 'yes' AND ? = 'yes') OR 
-            (heart_problem = 'yes' AND ? = 'yes') OR 
-            (lactose_intolerance = 'yes' AND ? = 'yes'))
-        )
+            (general = 'yes' OR
+                ((obese = 'yes' AND ? = 'yes') OR 
+                (diabetes = 'yes' AND ? = 'yes') OR 
+                (high_bp = 'yes' AND ? = 'yes') OR 
+                (high_cholesterol = 'yes' AND ? = 'yes') OR 
+                (fatty_liver = 'yes' AND ? = 'yes') OR 
+                (kidney_problem = 'yes' AND ? = 'yes') OR 
+                (heart_problem = 'yes' AND ? = 'yes') OR 
+                (lactose_intolerance = 'yes' AND ? = 'yes'))
+    )
+)
     '''
     cursor.execute(query, (user_profile[3], user_profile[3], user_profile[4], user_profile[6], user_profile[7], user_profile[8], user_profile[9], user_profile[10], user_profile[11], user_profile[12], user_profile[13]))
     return cursor.fetchall()
@@ -157,10 +159,9 @@ def analyze_harmful_ingredients(file, user_profile):
 
     # Step 3: Identify harmful ingredients
     harmful_ingredients = []
-    extracted_text_words = set(extracted_text.lower().split())
+    extracted_text_lower = extracted_text.lower()
     for ingredient_name, description in harmful_ingredients_dict.items():
-        ingredient_name_words = ingredient_name.split()
-        if any(word in extracted_text_words for word in ingredient_name_words):
+        if ingredient_name in extracted_text_lower:
             harmful_ingredients.append((ingredient_name, description))
             print(f'Found harmful ingredient: {ingredient_name} - {description}')
 
