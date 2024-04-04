@@ -48,9 +48,16 @@
         <div class="content">
             <div class="upload_image">
                 <div class="upload_section">
-                    <h2>Upload Image of Ingredients</h2>
-                    <p>Upload the image of the food ingredients list to analyze harmful ingredients in it based on your profile</p>
-                    
+                    <div class="header-container">
+                        <h2>Upload Image of Food Ingredients label</h2>
+                        <form method="POST" class="refresh-btn-form">
+                            <input type="hidden" name="refresh_data" value="true">
+                            <button type="submit" class="refresh-btn">
+                                <img src="static/images/refresh0.png" alt="Refresh Data">
+                            </button>
+                        </form>
+                    </div>
+
                     <form method="post" enctype="multipart/form-data">
                         <div class="upload-btn-wrapper">
                             <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
