@@ -59,6 +59,16 @@ cursor.execute('''
 conn.commit()
 conn.close()
 
+# # Connect to SQLite database
+# conn = sqlite3.connect('users.db')
+# cursor = conn.cursor()
+
+# # Add allergies column
+# cursor.execute("ALTER TABLE users ADD COLUMN allergies TEXT")
+
+# # Commit the changes and close the connection
+# conn.commit()
+# conn.close()
 
 email = os.getenv('EMAIL')
 password = os.getenv('EMAIL_PASSWORD')
@@ -170,6 +180,13 @@ def analyze_harmful_ingredients(file, user_profile):
     harmful_ingredients_for_user_names = [ingredient[0].lower() for ingredient in harmful_ingredients_for_user]
     user_based_harmful_ingredients = [ingredient for ingredient in harmful_ingredients if ingredient[0] in harmful_ingredients_for_user_names]
 
+    # Step 5: Check for allergies
+    allergies = user_profile[16].split(",")  # Assuming allergies is the 14th column in the user_profile and is comma-separated
+    found_allergies = []
+    for allergy in allergies:
+        if allergy.lower() in extracted_text_lower:
+            print(f'Found allergy: {allergy}')
+            found_allergies.append(allergy)
     
     # Check if any user-based harmful ingredients were found
     if user_based_harmful_ingredients:
@@ -180,7 +197,7 @@ def analyze_harmful_ingredients(file, user_profile):
         print('No harmful ingredients found based on user data.')
         return ['No harmful ingredients found for user']
 
-    os.remove(filename)  # Remove the uploaded image
+#    os.remove(filename)  # Remove the uploaded image
 
     # Step 5: Store harmful ingredients data in the database
     conn = sqlite3.connect('users.db')
@@ -191,7 +208,9 @@ def analyze_harmful_ingredients(file, user_profile):
     conn.commit()
     conn.close()
 
-    return user_based_harmful_ingredients
+    os.remove(filename)  # Remove the uploaded image
+
+    return user_based_harmful_ingredients, found_allergies
 
 def get_doctors_details(order_by='experience', direction='DESC'):
     conn = sqlite3.connect('doctors.db')
@@ -243,6 +262,8 @@ def register():
         kidney_problem = request.form['kidney_problem']
         heart_problem = request.form['heart_problem']
         lactose_intolerance = request.form['lactose_intolerance']
+        #allergies
+        allergies = request.form['allergies']
         #family doctor info
         family_doctor_name = request.form['family_doctor_name']
         family_doctor_email = request.form['family_doctor_email']
@@ -262,8 +283,8 @@ def register():
             # Insert the user into the database with additional information
             conn = sqlite3.connect('users.db')
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO users (name, email, age, gender, password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance, family_doctor_name, family_doctor_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                           (name, email, age, gender, hashed_password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance, family_doctor_name, family_doctor_email))
+            cursor.execute("INSERT INTO users (name, email, age, gender, password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance,allergies , family_doctor_name, family_doctor_email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                           (name, email, age, gender, hashed_password, obese, diabetes, high_bp, high_cholesterol, fatty_liver, kidney_problem, heart_problem, lactose_intolerance, allergies, family_doctor_name, family_doctor_email))
             conn.commit()
             conn.close()
 
@@ -348,7 +369,9 @@ def user():
                         return render_template('user.html', user=user, error=error, harmful_ingredients=harmful_ingredients, doctors_details=doctors_details)
 
                     # If the file exists and is allowed, proceed with OCR and detection
-                    session['harmful_ingredients'] = analyze_harmful_ingredients(file, user)
+                    harmful_ingredients, allergies = analyze_harmful_ingredients(file, user)
+                    session['harmful_ingredients'] = harmful_ingredients
+                    session['allergies'] = allergies
 
                 if 'doctor_email' in request.form:
                     # If the form is submitted, send the email
@@ -371,8 +394,8 @@ def user():
                     return redirect(url_for('user'))  # Redirect back to the user page
 
                 # Pass the user data and the harmful ingredients to the template
-                return render_template('user.html', user=user, harmful_ingredients=session.get('harmful_ingredients', []), doctors_details=doctors_details)  # Pass the doctors' details to the template
-
+                return render_template('user.html', user=user, harmful_ingredients=session.get('harmful_ingredients', []), allergies=session.get('allergies', []), doctors_details=doctors_details)
+        
         if not user:
             # If the user is not logged in, redirect to the login page
             return redirect(url_for('login'))

@@ -39,6 +39,7 @@
             <li>Kidney: {{ user[11] }}</li>
             <li>Heart Problem: {{ user[12] }}</li>
             <li>Lactose Intolerance: {{ user[13] }}</li>
+            <li>Allergies: {{ user[16] }}</li>
         </ul>
 
     </section>
@@ -89,20 +90,20 @@
                         </button>
                     </form>
                 </div>
-    
+
                 <div class="ingredients_list">
-                    {% if harmful_ingredients %}
-                        {% if harmful_ingredients[0] is string %}
-                            {{ harmful_ingredients[0] }}
-                        {% else %}
-                            <ul>
-                                {% for ingredient in harmful_ingredients %}
-                                    <li>{{ ingredient[0] }} - {{ ingredient[1] }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
+                    {% if harmful_ingredients or allergies %}
+                        <h2>Detected items:</h2>
+                        <ul>
+                            {% for ingredient in harmful_ingredients %}
+                                <li>{{ ingredient[0] }} - {{ ingredient[1] }}</li>
+                            {% endfor %}
+                            {% for allergy in allergies %}
+                                <li>{{ allergy }} - This ingredient may trigger an allergic reaction based on your profile.</li>
+                            {% endfor %}
+                        </ul>
                     {% else %}
-                        <h2>Upload image to find harmful ingredients in the food product for user</h2>
+                        <h2>Upload image to find harmful ingredients and allergies in the food product for user</h2>
                     {% endif %}
                 </div>
     
