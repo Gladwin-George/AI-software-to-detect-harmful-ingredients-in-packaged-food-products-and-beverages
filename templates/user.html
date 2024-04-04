@@ -58,10 +58,16 @@
                         </form>
                     </div>
 
+                    <p>Check the example image to better understanding about the image to upload</p>
+
+
                     <form method="post" enctype="multipart/form-data">
-                        <div class="upload-btn-wrapper">
-                            <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
-                            <label for="file">Click to select ingredients image</label>
+                        <div class="upload-container">
+                            <img src="static/images/eg.png" alt="Your Image Description" class="left-side-image">
+                            <div class="upload-btn-wrapper">
+                                <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
+                                <label for="file">Click to select ingredients image</label>
+                            </div>
                         </div>
                         <input type="submit" name="upload" value="Analyze the ingredients">
                     </form>
