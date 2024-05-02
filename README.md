@@ -14,7 +14,7 @@ This website is a Flask web application that utilizes optical character recognit
 
 1. **Clone the Repository**: 
    ```bash
-   git clone https://github.com/Gladwin-George/AI-software-to-detect-harmful-ingredients-in-packaged-food-products-and-beverages.git
+   git clone https://github.com/Gladwin-George/AI-software-to-identify-harmful-ingredients-in-packaged-food-items-and-beverages.git
    ```
 
 2. **Install Dependencies**: 
