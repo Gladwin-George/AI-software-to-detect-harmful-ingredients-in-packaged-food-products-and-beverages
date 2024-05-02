@@ -24,12 +24,12 @@ This website is a Flask web application that utilizes optical character recognit
 
 3. **Set Up Easyocr / Tesseract-OCR**: 
 
-   - For easyocr:
+   **For easyocr**:
     ```bash
     pip install easyocr
     ```
 
-   - For Tesseract-OCR
+   **For Tesseract-OCR**:
      Download and install Tesseract-OCR from [here](https://github.com/tesseract-ocr/tesseract).
      Set the `pytesseract.tesseract_cmd` variable in `app.py` to the path where Tesseract is installed.
 
