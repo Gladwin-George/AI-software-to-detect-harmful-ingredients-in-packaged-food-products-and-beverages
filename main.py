@@ -1,18 +1,12 @@
 import os
 import cv2
 import easyocr
-import numpy as np
 import sqlite3
 import bcrypt
 import smtplib
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
-
-from PIL import Image
 from  pytesseract import pytesseract
 
 pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -78,6 +72,9 @@ def analyze_general_harmful_ingredients(file):
     filename = 'uploaded_image.jpg'
     file.save(filename)
 
+    # Two OCR methods to extract text from the image 
+
+    # First using easyocr
     # Step 1: Extract text from the image using ocr
     # img = cv2.imread(filename)
     # reader = easyocr.Reader(['en'])
@@ -85,6 +82,7 @@ def analyze_general_harmful_ingredients(file):
     # extracted_text = ' '.join([result[1] for result in text_results])
     # print(f'Extracted text: {extracted_text}')
 
+    # Second using pytesseract
     # Step 1: Extract text from the image using tesseract
     img = cv2.imread(filename)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -195,7 +193,7 @@ def analyze_harmful_ingredients(file, user_profile):
             print(f'Found user-based harmful ingredient: {ingredient[0]} - {ingredient[1]}')
     else:
         print('No harmful ingredients found based on user data.')
-        return ['No harmful ingredients found for user']
+        return ['No harmful ingredients found for user'], []
 
 #    os.remove(filename)  # Remove the uploaded image
 
