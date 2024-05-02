@@ -18,20 +18,21 @@ This website is a Flask web application that utilizes optical character recognit
    ```
 
 2. **Install Dependencies**: 
-   ```bash
+   ```python
    pip install -r requirements.txt
    ```
 
 3. **Set Up Easyocr / Tesseract-OCR**: 
 
    **For easyocr**:
-    ```bash
+    ```python
     pip install easyocr
     ```
 
    **For Tesseract-OCR**:
-     Download and install Tesseract-OCR from [here](https://github.com/tesseract-ocr/tesseract).
-     Set the `pytesseract.tesseract_cmd` variable in `app.py` to the path where Tesseract is installed.
+
+    Download and install Tesseract-OCR from [here](https://github.com/tesseract-ocr/tesseract).
+    Set the `pytesseract.tesseract_cmd` variable in `app.py` to the path where Tesseract is installed.
 
 
 4. **Set Up Email Configuration**: 
@@ -45,24 +46,24 @@ This website is a Flask web application that utilizes optical character recognit
 ## Usage
 
 1. **Run the Flask Application**: 
-   ```bash
+   ```python
    python app.py
    ```
 
 2. **Access the Application**: 
-   - Open a web browser and go to `http://127.0.0.1:5000/` or `http://localhost:5000/`.
+    Open a web browser and go to `http://127.0.0.1:5000/` or `http://localhost:5000/`.
 
 3. **Register and Login**: 
-   - Register as a new user or login with existing credentials to access the user dashboard.
+    Register as a new user or login with existing credentials to access the user dashboard.
 
 4. **Upload Images**: 
-   - After logging in, upload images for OCR processing.
+    After logging in, upload images for OCR processing.
 
 5. **Edit Profile**: 
-   - Users can edit their profiles to update personal information and health conditions.
+    Users can edit their profiles to update personal information and health conditions.
 
 6. **Logout**: 
-   - Users can logout from their accounts by clicking on the logout button.
+    Users can logout from their accounts by clicking on the logout button.
 
 ## Customization
 
