@@ -163,7 +163,7 @@ cython_debug/
 sample images/
 
 #data base file
-users.db
+#users.db
 
 #codes to check sql values
 sql codes
