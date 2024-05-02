@@ -175,10 +175,10 @@ database try/
 extra databases/ 
 
 #databases to try codes
-harmful_ingredients.db
+#harmful_ingredients.db
 try_harmful_ingredients.db
 user2.db
-doctors.db
+#doctors.db
 
 #extra python try files
 extra python try files/
