@@ -30,11 +30,12 @@ This website is a Flask web application that utilizes optical character recognit
     ```
 
    **For Tesseract-OCR**:
-     Download and install Tesseract-OCR from [here](https://github.com/tesseract-ocr/tesseract).
-     Set the `pytesseract.tesseract_cmd` variable in `app.py` to the path where Tesseract is installed.
+   
+   Download and install Tesseract-OCR from [here](https://github.com/tesseract-ocr/tesseract).
+   Set the `pytesseract.tesseract_cmd` variable in `app.py` to the path where Tesseract is installed.
 
 
-4. **Set Up Email Configuration**: 
+5. **Set Up Email Configuration**: 
    - Create a `.env` file in the project directory.
    - Add your email credentials:
      ```
