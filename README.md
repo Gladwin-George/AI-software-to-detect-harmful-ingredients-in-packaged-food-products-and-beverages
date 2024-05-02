@@ -1,7 +1,3 @@
-Sure, here's a README file template for your Flask project:
-
----
-
 # AI software to detect harmful ingredients in packaged food products and beverages
 
 This website is a Flask web application that utilizes optical character recognition (OCR) to analyze harmful ingredients from packaged food products and beverages from ingredients label images. It can detect harmful ingredients in food products and provide personalized health recommendations based on user profiles.
@@ -27,8 +23,15 @@ This website is a Flask web application that utilizes optical character recognit
    ```
 
 3. **Set Up Easyocr / Tesseract-OCR**: 
-   - Download and install Tesseract-OCR from [here](https://github.com/tesseract-ocr/tesseract).
-   - Set the `pytesseract.tesseract_cmd` variable in `app.py` to the path where Tesseract is installed.
+
+   - For easyocr:
+    '''bash
+    pip install easyocr
+    '''
+
+   - For Tesseract-OCR
+    - Download and install Tesseract-OCR from [here](https://github.com/tesseract-ocr/tesseract).
+    - Set the `pytesseract.tesseract_cmd` variable in `app.py` to the path where Tesseract is installed.
 
 
 4. **Set Up Email Configuration**: 
