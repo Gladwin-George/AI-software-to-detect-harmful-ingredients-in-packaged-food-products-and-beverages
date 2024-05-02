@@ -1,0 +1,8 @@
+Flask
+opencv-python
+easyocr
+bcrypt
+python-dotenv
+sqlite3
+smtplib
+
